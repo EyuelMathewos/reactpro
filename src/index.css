@@ -1,0 +1,26 @@
+.logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+
+/* this is for home */
+.homelogo{
+  width: 120px;
+  height: 31px;
+  background: rgba(255,255,255,.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+/* this is for login */
+
+.login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: center;
+}
+.login-form-button {
+  width: 100%;
+}
