@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "../../../index.css";
+import axios from 'axios';
+import qs from 'qs';
 import { Form, Input, Select, Button, AutoComplete } from "antd";
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-class Report extends React.Component {
+class Schedule extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: []
@@ -17,44 +19,26 @@ class Report extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        axios.post('http://localhost:3000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
+        
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+        console.log('Received values of form: ', values);
+        console.log(qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }));
+
+       
       }
     });
   };
 
-  handleConfirmBlur = e => {
-    const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
+  
 
-  compareToFirstPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
-    } else {
-      callback();
-    }
-  };
 
-  validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(["confirm"], { force: true });
-    }
-    callback();
-  };
-
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = [".com", ".org", ".net"].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
-  };
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -90,57 +74,50 @@ class Report extends React.Component {
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="Task To perform">
-          {getFieldDecorator("email", {
+          {getFieldDecorator("taskToPerform", {
             rules: [
               {
-                type: "email",
-                message: "The input is not valid E-mail!"
+                message: "The input is not valid !"
               },
               {
                 required: true,
-                message: "Please input your E-mail!"
+                message: "Please enter Task to perform!"
               }
             ]
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Actual Time">
-          {getFieldDecorator("password", {
+          {getFieldDecorator("actualTime", {
             rules: [
               {
                 required: true,
-                message: "Please input your password!"
-              },
-              {
-                validator: this.validateToNextPassword
+                message: "Please enter actual time!"
               }
             ]
-          })(<Input type="password" />)}
+          })(<Input/>)}
         </Form.Item>
         <Form.Item label="Perfomance Per Day">
-          {getFieldDecorator("password", {
+          {getFieldDecorator("performancePerDay", {
             rules: [
               {
                 required: true,
-                message: "Please input your password!"
+                message: "Please enter performace per day!"
               },
               {
                 validator: this.validateToNextPassword
               }
             ]
-          })(<Input type="password" />)}
+          })(<Input/>)}
         </Form.Item>
         <Form.Item label="Price for the Task">
-          {getFieldDecorator("confirm", {
+          {getFieldDecorator("planedPrice", {
             rules: [
               {
                 required: true,
-                message: "Please confirm your password!"
-              },
-              {
-                validator: this.compareToFirstPassword
+                message: "Please enter the planned price!"
               }
             ]
-          })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+          })(<Input/>)}
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
@@ -154,4 +131,4 @@ class Report extends React.Component {
 }
 
 //export const Report = Form.create({ name: "report" })(report);
-export const report = Form.create({ name: 'Login' })(Report);
+export const schedule = Form.create({ name: 'create Schedule' })(Schedule);

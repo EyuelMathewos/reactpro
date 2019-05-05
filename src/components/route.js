@@ -7,7 +7,7 @@ import { SiderDemo } from './dashboard';
  //import { WrapperAccountSetting } from './accountsetting'
 import { Login } from './login'
 import { project } from './src/Project/project';
-import {report} from "./src/Project/report";
+import {schedule} from "./src/Project/schedule";
 // import Settings from './Settings'
 // import hellow from './Helloworld'
 import App from './example';
@@ -32,7 +32,7 @@ const Main = () => (
     <Switch>
       <Route exact path="/" component={home} />
       <Route exact path="/project" component={project} />
-      <Route exact path="/report" component={report}/>
+      <Route exact path="/schedule" component={schedule}/>
       {/* <Route exact path="/viewreport" component={report}/> */}
       {/* <Route path="/account" component={account} /> */}
       {/* <Route  path="/register" component={WrappedRegistrationForm} /> */}

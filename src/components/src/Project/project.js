@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "../../../index.css";
+import axios from 'axios';
+import qs from 'qs'
 import {
   Form,
   Select,
@@ -21,20 +23,20 @@ const options = [
     label: "Addis Abeba"
   },
   {
-    value: "projectManager",
-    label: "Project Manager"
+    value: "adama",
+    label: "adama"
   },
   {
-    value: "siteEngineer",
-    label: "Site Engineer"
+    value: "mekele",
+    label: "mekele"
   },
   {
-    value: "siteCoordinator",
-    label: "Site Coordinator"
+    value: "gambela",
+    label: "gambela"
   },
   {
-    value: "finance",
-    label: "Finance"
+    value: "jema",
+    label: "jema"
   }
 ];
 
@@ -49,7 +51,16 @@ class Demo extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        axios.post('http://localhost:3000/api/projects',qs.stringify(values, { filter: ['projectName','projectLifeTime','siteplace','propertyowner'],arrayFormat: 'comma' }))
+        
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
         console.log("Received values of form: ", values);
+        console.log(qs.stringify(values, { filter: ['projectName','projectLifeTime','siteplace','propertyowner'],arrayFormat: 'comma' }));
       }
     });
   };
@@ -71,13 +82,13 @@ class Demo extends React.Component {
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="Project Name">
-          {getFieldDecorator("projectname", {
+          {getFieldDecorator("projectName", {
             rules: [{ required: true, message: "Please input your username!" }]
           })(<Input />)}
         </Form.Item>
 
         <Form.Item label="Place of the Site">
-          {getFieldDecorator("site", {
+          {getFieldDecorator("siteplace", {
             initialValue: ["addisAbaba"],
             rules: [
               {
@@ -96,7 +107,7 @@ class Demo extends React.Component {
         </Form.Item>
 
         <Form.Item label="Project life time">
-          {getFieldDecorator("projectlifetime", {
+          {getFieldDecorator("projectLifeTime", {
             rules: [{ required: true, message: "Please input your username!" }]
           })(<RangePicker onChange={onChange} />)}
         </Form.Item>
