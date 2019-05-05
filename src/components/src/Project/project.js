@@ -154,6 +154,6 @@ class Demo extends React.Component {
   }
 }
 
-export const WrappedDemo = Form.create({ name: "validate_other" })(Demo);
+export const project = Form.create({ name: "validate_other" })(Demo);
 
-ReactDOM.render(<WrappedDemo />, document.getElementById("container"));
+//ReactDOM.render(<WrappedDemo />, document.getElementById("container"));
