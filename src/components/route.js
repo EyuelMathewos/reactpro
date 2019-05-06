@@ -12,12 +12,14 @@ import {schedule} from "./src/Project/schedule";
 // import hellow from './Helloworld'
 import App from './example';
 import auth from "./auth";
+import {landingpage} from './landingPage';
 //import {Demo} from "./src/Project/viewReport"
-
+let authuser = new auth();
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props)=>(
    //need to auth.isAuthenticated to return boolean
-   auth.isAuthenticated === true
+   
+   authuser.isAuthenticated() === true
    ?<Component {...props}/>
    : <Redirect to='/login'/>
   )
@@ -39,7 +41,7 @@ const Main = () => (
       {/* <Route  path="/accountsetting" component={WrapperAccountSetting} /> */}
       <Route  path="/login" component={Login} />
       <Route  path="/dashboard" component={SiderDemo} />
-      {/* <Route  path="/example" component={App} /> */}
+      <Route  path="/land" component={landingpage} />
       <PrivateRoute path="/example" component={App}/>
     </Switch>
   </main>

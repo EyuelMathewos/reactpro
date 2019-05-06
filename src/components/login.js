@@ -35,7 +35,7 @@ import {
       //this is the redirect by role 
       let authuser = new auth();
        console.log("this the value :"+authuser.isAuthenticated());
-      
+       
       //this is the reditect by role 
       
     })
@@ -61,7 +61,8 @@ import {
   
 
   render() {
-      
+    
+    
     const { getFieldDecorator } = this.props.form;
     
     return (
