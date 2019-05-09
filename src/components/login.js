@@ -1,24 +1,29 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {ReactDOM} from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
 import axios from 'axios';
 import qs from 'qs';
 import auth from './auth';
 import { withRouter } from "react-router-dom";
-
-
+//import hello from './landingPage';
+import { SiderDemo } from './dashboard';
 import {
   Form, Icon, Input, Button, Checkbox, Card
 } from 'antd';
-
+      let authuser = new auth();
+      
  class login extends React.Component {
-
+  // navigateToFeature() {
+  //   const { history } = this.props;
+  //   history.push("/feature");
+  // }
  
   
   handleSubmit = (e) => {
     e.preventDefault();
+    const { history } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         localStorage.setItem("hello","hello world form react");
@@ -33,8 +38,30 @@ import {
       localStorage.setItem("userRole",getResponse.data.role);
       localStorage.setItem("userName",getResponse.data.username);
       //this is the redirect by role 
-      let authuser = new auth();
-       console.log("this the value :"+authuser.isAuthenticated());
+
+      
+      console.log("this the value :"+authuser.isAuthenticated());
+      if(authuser.isAuthenticated()){
+       if("admin"===getResponse.data.role){
+        history.push("/dashboard");
+       }
+       else if("projectManager"===getResponse.data.role){
+        history.push("/projectmanager"); 
+       }
+       else if("siteEngineer"===getResponse.data.role){
+        history.push("/siteengineer"); 
+       }
+       else if("siteCoordinator"===getResponse.data.role){
+        history.push("/sitecoordinator"); 
+       }
+       else if("finance"===getResponse.data.role){
+        history.push("/finance"); 
+       }
+       else{
+         history.push("/pagenotfound");
+       }
+      }
+       
        
       //this is the reditect by role 
       
@@ -57,6 +84,18 @@ import {
        console.log("?filter="+qs.stringify({"where": {"id": "5cb156c02ce1b8041e980450"}}));
       }
     });
+
+
+
+    axios.get('http://localhost:3000/api/projects')
+    .then(function (proresponse) {
+      //console.log(proresponse);
+      console.log(proresponse.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   }
   
 
@@ -105,6 +144,7 @@ import {
         </div>
       
     );
+    
   }
 }
 

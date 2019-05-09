@@ -12,7 +12,7 @@ import {
 } from 'antd';
 let authuser = new auth();
 
-const AuthButton = withRouter(
+export const AuthButton = withRouter(
   ({ history }) =>
   authuser.isAuthenticated ? (
       <p>
@@ -20,6 +20,8 @@ const AuthButton = withRouter(
        
         <Button
           onClick={() => {
+            authuser.setauthenticated;
+            console.log("the value is"+authuser.authenticated);
             authuser.login(() => {
               history.push("/example");
             });

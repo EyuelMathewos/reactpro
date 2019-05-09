@@ -1,8 +1,9 @@
   class auth {
+    
     constructor() {
-      this.authenticated = false;
+      this.authenticated = true;
     }
-  
+     
      login(cb) {
       this.authenticated = true;
       setTimeout(cb,100)
@@ -16,6 +17,7 @@
      isAuthenticated() {
       return this.authenticated;
     }
+    
   }
 // const auth = {
 //   isAuthenticated: false,

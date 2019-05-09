@@ -25,6 +25,10 @@ export class SiderDemo extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   }
+  navigateToFeature() {
+    const { history } = this.props;
+    history.push("/");
+  }
 
   render() {
     

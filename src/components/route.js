@@ -12,7 +12,10 @@ import {schedule} from "./src/Project/schedule";
 // import hellow from './Helloworld'
 import App from './example';
 import auth from "./auth";
+import {table} from "./src/Project/viewProjects";
 import {landingpage} from './landingPage';
+import {projectManager} from './src/projectmanager';
+import {siteCoordinator} from './src/sitecoordinator';
 //import {Demo} from "./src/Project/viewReport"
 let authuser = new auth();
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -35,6 +38,7 @@ const Main = () => (
       <Route exact path="/" component={home} />
       <Route exact path="/project" component={project} />
       <Route exact path="/schedule" component={schedule}/>
+      <Route exact path="/projectmanager/viewproject" component={table}/>
       {/* <Route exact path="/viewreport" component={report}/> */}
       {/* <Route path="/account" component={account} /> */}
       {/* <Route  path="/register" component={WrappedRegistrationForm} /> */}
@@ -42,7 +46,10 @@ const Main = () => (
       <Route  path="/login" component={Login} />
       <Route  path="/dashboard" component={SiderDemo} />
       <Route  path="/land" component={landingpage} />
+      <Route  path="/projectmanager" component={projectManager} />
+      <Route  path="/sitecoordinator" component={siteCoordinator} />
       <PrivateRoute path="/example" component={App}/>
+      
     </Switch>
   </main>
   
