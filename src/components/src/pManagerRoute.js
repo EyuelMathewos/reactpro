@@ -7,12 +7,13 @@ import auth from "../auth";
 import { Login } from '../login';
 import { project } from './Project/project';
 import {table} from "./Project/viewProjects";
-let authuser = new auth();
+let logauth = new Login();
+
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props)=>(
    //need to auth.isAuthenticated to return boolean
    
-   authuser.isAuthenticated() === true
+   localStorage.getItem("auth")
    ?<Component {...props}/>
    : <Redirect to='/login'/>
   )
@@ -23,15 +24,17 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
 
 
 const Submain = () => (
+  
   <main>
      <Switch>
-      {/* <Route exact path="/login" component={Login} /> */}
+       
+      <Route exact path="/login" component={Login} />
       {/* <Route path="/account" component={account} /> */}
       <PrivateRoute path="/example" component={App}/>  
       <PrivateRoute path="/projectmanager/createproject" component={project}/> 
-      <PrivateRoute exact path="/projectmanager/viewproject" component={table}/> 
+      <Route exact path="/projectmanager/viewproject" component={table}/> 
     </Switch>
-  
+     
   </main>
 );
 

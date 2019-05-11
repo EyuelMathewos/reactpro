@@ -9,8 +9,9 @@ import auth from './auth';
 import { withRouter } from "react-router-dom";
 //import hello from './landingPage';
 import { SiderDemo } from './dashboard';
+import UserService from "../service/UserServices";
 import {
-  Form, Icon, Input, Button, Checkbox, Card
+  Form, Icon, Input, Button, Checkbox, Card,message
 } from 'antd';
       let authuser = new auth();
       
@@ -21,18 +22,40 @@ import {
   // }
  
   
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   this.props.form.validateFields((err, values) => {
+  //     if (!err) {
+  //       UserService.login(values.username, values.password)
+  //         .then(response => {
+  //           if (response.success) {
+  //             message.success(response.message);
+  //             setTimeout(() => {
+  //               this.props.history.push("/");
+  //             }, 1000);
+  //           } else {
+  //             message.error(response.message);
+  //           }
+  //         })
+  //         .catch(error => {
+  //           message.error(error.message);
+  //         });
+  //     }
+  //   });
+  // };
+  
   handleSubmit = (e) => {
     e.preventDefault();
     const { history } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         localStorage.setItem("hello","hello world form react");
-        axios.post('http://localhost:3000/api/Accounts/login',qs.stringify(values))
+        axios.post('http://localhost:4000/api/Accounts/login',qs.stringify(values))
     .then(function (response) {
     console.log(response);
     localStorage.setItem("Accesstoken",response.data.id);
     //getting user information {"where": {"id": "5cb156c02ce1b8041e980450"}}
-    axios.get("http://localhost:3000/api/Accounts/"+response.data.userId)
+    axios.get("http://localhost:4000/api/Accounts/"+response.data.userId)
     .then(function (getResponse) {
       console.log(getResponse);
       localStorage.setItem("userRole",getResponse.data.role);
@@ -87,7 +110,7 @@ import {
 
 
 
-    axios.get('http://localhost:3000/api/projects')
+    axios.get('http://localhost:4000/api/projects')
     .then(function (proresponse) {
       //console.log(proresponse);
       console.log(proresponse.data);

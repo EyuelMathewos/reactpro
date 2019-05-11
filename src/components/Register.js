@@ -4,6 +4,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
 import axios from 'axios';
+import Api from "../service/Api";
 import qs from 'qs'
 import {
   Form, Input, Tooltip, Icon, Cascader, Select, Button,
@@ -51,7 +52,7 @@ const options = [
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:3000/api/Accounts',qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
+        axios.post('http://localhost:4000/api/Accounts',qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
         
         .then(function (response) {
           console.log(response);
@@ -66,6 +67,19 @@ const options = [
       }
     });
   }
+
+  // handleSubmit = (e) =>{
+  //   e.preventDefault();
+  //   this.props.form.validateFieldsAndScroll((err, values) => {
+  //     if (!err) {
+  //         Api.create("Accounts",qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
+  //         .then(response =>{
+  //           console.log("THE RESPONSE IS ", response.data)
+  //         })
+  //     }
+  //   });
+  // }
+
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;

@@ -19,7 +19,7 @@ class Schedule extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:3000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
+        axios.post('http://localhost:4000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
         
         .then(function (response) {
           console.log(response);

@@ -22,7 +22,7 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props)=>(
    //need to auth.isAuthenticated to return boolean
    
-   authuser.isAuthenticated() === true
+   localStorage.getItem("auth")
    ?<Component {...props}/>
    : <Redirect to='/login'/>
   )
@@ -30,11 +30,14 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
   }/>
 )
 
-
 const Main = () => (
   <main>
     
     <Switch>
+      
+       
+      <Route  path="/dashboard" component={SiderDemo} />  
+    
       <Route exact path="/" component={home} />
       <Route exact path="/project" component={project} />
       <Route exact path="/schedule" component={schedule}/>
@@ -44,12 +47,12 @@ const Main = () => (
       {/* <Route  path="/register" component={WrappedRegistrationForm} /> */}
       {/* <Route  path="/accountsetting" component={WrapperAccountSetting} /> */}
       <Route  path="/login" component={Login} />
-      <Route  path="/dashboard" component={SiderDemo} />
-      <Route  path="/land" component={landingpage} />
-      <Route  path="/projectmanager" component={projectManager} />
-      <Route  path="/sitecoordinator" component={siteCoordinator} />
-      <PrivateRoute path="/example" component={App}/>
       
+      <Route  path="/land" component={landingpage} />
+      <PrivateRoute path="/projectmanager" component={projectManager} />
+      <PrivateRoute path="/sitecoordinator" component={siteCoordinator} />
+      <PrivateRoute path="/example" component={App}/>
+      <Route exact path="/projectmanager/viewproject" component={table}/> 
     </Switch>
   </main>
   

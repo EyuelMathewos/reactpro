@@ -30,6 +30,16 @@
     address "^1.0.1"
     debug "^2.6.0"
 
+"@types/cookie@^0.3.1":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.3.2.tgz#453f4b14b25da6a8ea4494842dedcbf0151deef9"
+  integrity sha512-aHQA072E10/8iUQsPH7mQU/KUyQBZAGzTVRCUvnSz8mSvbrYsP4xEO2RSA0Pjltolzi0j8+8ixrm//Hr4umPzw==
+
+"@types/object-assign@^4.0.30":
+  version "4.0.30"
+  resolved "https://registry.yarnpkg.com/@types/object-assign/-/object-assign-4.0.30.tgz#8949371d5a99f4381ee0f1df0a9b7a187e07e652"
+  integrity sha1-iUk3HVqZ9Dge4PHfCpt6GH4H5lI=
+
 "@types/prop-types@*":
   version "15.7.0"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
@@ -429,7 +439,7 @@ arrify@^1.0.0, arrify@^1.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
 
-asap@^2.0.6, asap@~2.0.3:
+asap@^2.0.0, asap@^2.0.6, asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
@@ -449,6 +459,11 @@ asn1@~0.2.3:
   integrity sha512-jxwzQpLQjSmWXgwaCZE9Nz+glAG01yF1QnWgbhGwHI5A6FRIEY6IVqtHhIepHqI7/kyEyQEagBC5mBEFlIYvdg==
   dependencies:
     safer-buffer "~2.1.0"
+
+assert-ok@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/assert-ok/-/assert-ok-1.0.0.tgz#5b5cf795f9275c59c714d66c3a06d7de70e43ec8"
+  integrity sha1-W1z3lfknXFnHFNZsOgbX3nDkPsg=
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -1472,12 +1487,31 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
+browser-async-store@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/browser-async-store/-/browser-async-store-1.0.0.tgz#17133b863aaf2a07facf92d36e593d0f8e30ea0c"
+  integrity sha1-FxM7hjqvKgf6z5LTblk9D44w6gw=
+  dependencies:
+    assert-ok "~1.0.0"
+    dezalgo "~1.0.3"
+    xtend "~4.0.0"
+
 browser-resolve@^1.11.2:
   version "1.11.3"
   resolved "https://registry.yarnpkg.com/browser-resolve/-/browser-resolve-1.11.3.tgz#9b7cbb3d0f510e4cb86bdbd796124d28b5890af6"
   integrity sha512-exDi1BYWB/6raKHmDTCicQfTkqwN5fioMFV4j8BsfMU4R2DK/QfZfK7kOVkmWCNANf0snkBzqGqAJBao9gZMdQ==
   dependencies:
     resolve "1.1.7"
+
+browser-session-store@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/browser-session-store/-/browser-session-store-2.0.2.tgz#e761829e542ca37e58ac28918657487026e45978"
+  integrity sha1-52GCnlQso35YrCiRhldIcCbkWXg=
+  dependencies:
+    browser-async-store "~1.0.0"
+    global "~4.3.0"
+    has-session-storage "~1.0.1"
+    storage-sham "~1.0.0"
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.2.0"
@@ -2089,7 +2123,7 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
 
-cookie@0.3.1:
+cookie@0.3.1, cookie@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
   integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
@@ -2539,6 +2573,14 @@ detect-port-alt@1.1.3:
     address "^1.0.1"
     debug "^2.6.0"
 
+dezalgo@~1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/dezalgo/-/dezalgo-1.0.3.tgz#7f742de066fc748bc8db820569dddce49bf0d456"
+  integrity sha1-f3Qt4Gb8dIvI24IFad3c5Jvw1FY=
+  dependencies:
+    asap "^2.0.0"
+    wrappy "1"
+
 diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
@@ -2620,6 +2662,11 @@ dom-urls@^1.1.0:
   integrity sha1-AB3fgWKM0ecGElxxdvU8zsVdkY4=
   dependencies:
     urijs "^1.16.1"
+
+dom-walk@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
+  integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -3699,6 +3746,14 @@ global-prefix@^1.0.1:
     is-windows "^1.0.1"
     which "^1.2.14"
 
+global@~4.3.0:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/global/-/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
+  integrity sha1-52mJJopsdMOJCLEwWxD8DjlOnQ8=
+  dependencies:
+    min-document "^2.19.0"
+    process "~0.5.1"
+
 globals@^9.14.0, globals@^9.18.0:
   version "9.18.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
@@ -3818,6 +3873,13 @@ has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
+
+has-session-storage@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/has-session-storage/-/has-session-storage-1.0.1.tgz#d03cfb6b56a5d58cf86103320a2cdc343cbfa353"
+  integrity sha1-0Dz7a1al1Yz4YQMyCizcNDy/o1M=
+  dependencies:
+    global "~4.3.0"
 
 has-symbols@^1.0.0:
   version "1.0.0"
@@ -5522,6 +5584,13 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
+min-document@^2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
+  integrity sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
+  dependencies:
+    dom-walk "^0.1.0"
+
 mini-store@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/mini-store/-/mini-store-2.0.0.tgz#0843c048d6942ce55e3e78b1b67fc063022b5488"
@@ -6673,6 +6742,11 @@ process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
+
+process@~0.5.1:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
+  integrity sha1-FjjYqONML0QKkduVq5rrZ3/Bhc8=
 
 progress@^1.1.8:
   version "1.1.8"
@@ -8380,6 +8454,11 @@ statuses@~1.4.0:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   integrity sha512-zhSCtt8v2NDrRlPQpCNtw/heZLtfUDqxBM1udqikb/Hbk52LK4nQSwr10u77iopCW5LsyHpuXS0GnEc48mLeew==
 
+storage-sham@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/storage-sham/-/storage-sham-1.0.0.tgz#16b20e89cfa59a5fcde159295171c98f8bddcf9e"
+  integrity sha1-FrIOic+lml/N4VkpUXHJj4vdz54=
+
 stream-browserify@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"
@@ -8895,6 +8974,16 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
+universal-cookie@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-4.0.0.tgz#1eb790a684e047574694ea71418dc9752d188630"
+  integrity sha512-6JVx+3oGPjslGqFhQ8YSIBHmYTx8HbyAEH++2/b6SKNXsbsdQ7lU7wRG2bYcRB5JVCz8GYgQ+Ixew91hn3Dy9w==
+  dependencies:
+    "@types/cookie" "^0.3.1"
+    "@types/object-assign" "^4.0.30"
+    cookie "^0.3.1"
+    object-assign "^4.1.0"
+
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -9354,7 +9443,7 @@ xml-name-validator@^2.0.1:
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
   integrity sha1-TYuPHszTQZqjYgYb7O9RXh5VljU=
 
-xtend@^4.0.0:
+xtend@^4.0.0, xtend@~4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
   integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=

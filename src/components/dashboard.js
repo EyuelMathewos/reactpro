@@ -10,12 +10,12 @@ import Submain from './dashroute';
 import {
   Layout, Menu, Icon,
 } from 'antd';
-
+import auth from './auth';
 const {
   Header, Content, Footer, Sider,
 } = Layout;
 const SubMenu = Menu.SubMenu;
-
+let authuser = new auth();
 export class SiderDemo extends React.Component {
   state = {
     collapsed: false,
@@ -32,7 +32,7 @@ export class SiderDemo extends React.Component {
 
   render() {
     
-   
+   console.log("is auth"+authuser.isAuthenticated());
     return (
        <BrowserRouter>
        

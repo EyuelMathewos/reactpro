@@ -8,6 +8,7 @@ import { DragDropContext, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import axios from 'axios';
+import qs from 'qs';
 let dragingIndex = -1;
  let  proResponse;
 export class BodyRow extends React.Component {
@@ -18,12 +19,16 @@ export class BodyRow extends React.Component {
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    axios.get('http://localhost:3000/api/projects')
+    axios.get('http://localhost:4000/api/projects')
     .then(function (projectResponse) {
       //console.log(proresponse);
-      proResponse =projectResponse.data;
-      console.log(proResponse[5]);
-      //console.log("this is value"+proResponse);
+      //console.log(JSON.stringify({ x: 5, y: 6 }));
+      // proResponse =projectResponse.data;
+      // console.log(proResponse[0]);
+     
+      
+      console.log(projectResponse);
+     // console.log("this is value"+proResponse.data[5]);
     })
     .catch(function (error) {
       console.log(error);
@@ -175,7 +180,7 @@ class DragSortingTable extends React.Component {
   render() {
     
     return (
-      
+     
       <Table
         columns={columns}
         dataSource={this.state.data}
@@ -186,7 +191,7 @@ class DragSortingTable extends React.Component {
         })}
       />
     );
-  }
+      }
 }
 
 export const table = DragDropContext(HTML5Backend)(DragSortingTable);
