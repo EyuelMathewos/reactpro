@@ -1,8 +1,8 @@
 import Api from "./Api";
 import ClientSession from "./ClientSession";
-
+import Cookies from 'universal-cookie';
 const pluralName = "Accounts";
-
+const cookies = new Cookies();
 class UserService {
   static login = (email, password) => {
     const url = pluralName + '/login';
@@ -15,6 +15,8 @@ class UserService {
                     ClientSession.storeAuth(response.data, err => {
                         err ? console.error('cannot save session') : ''
                     });
+                  cookies.set('access_token',response.data.id);
+                  //cookies.set('myCat', 'Pacman');
                     return {
                         success: true,
                         message: "Logged in successfully",

@@ -36,6 +36,7 @@ class ClientSession {
                   }, (err) => {console.log(err)});
                 func(true)
               } else {
+                
                 ClientSession.removeAuth((err)=> console.log(err));
                 func(false);
               }

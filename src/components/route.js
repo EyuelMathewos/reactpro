@@ -19,6 +19,7 @@ import {siteCoordinator} from './src/sitecoordinator';
 //import {Demo} from "./src/Project/viewReport"
 let authuser = new auth();
 const PrivateRoute = ({component: Component, ...rest}) =>(
+  
   <Route {...rest} render={(props)=>(
    //need to auth.isAuthenticated to return boolean
    
@@ -49,8 +50,8 @@ const Main = () => (
       <Route  path="/login" component={Login} />
       
       <Route  path="/land" component={landingpage} />
-      <PrivateRoute path="/projectmanager" component={projectManager} />
-      <PrivateRoute path="/sitecoordinator" component={siteCoordinator} />
+      <Route path="/projectmanager" component={projectManager} />
+      <Route path="/sitecoordinator" component={siteCoordinator} />
       <PrivateRoute path="/example" component={App}/>
       <Route exact path="/projectmanager/viewproject" component={table}/> 
     </Switch>
