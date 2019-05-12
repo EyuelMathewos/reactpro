@@ -15,6 +15,7 @@ class UserService {
                     ClientSession.storeAuth(response.data, err => {
                         err ? console.error('cannot save session') : ''
                     });
+                  cookies.set('userId',response.data.userId);
                   cookies.set('access_token',response.data.id);
                   //cookies.set('myCat', 'Pacman');
                     return {
