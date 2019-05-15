@@ -2,11 +2,11 @@
 import React from 'react';
 import {Route,Switch, Redirect } from 'react-router-dom';
 import {projectManager} from './projectmanager';
-import App from '../example';
-import auth from "../auth";
-import { Login } from '../login';
-import { project } from './Project/project';
-import {table} from "./Project/viewProjects";
+import App from '../../../components/example';
+import auth from "../../auth";
+import { Login } from '../../login';
+import { project } from '../Project/createProject';
+import {table} from "../Project/viewProjects";
 let logauth = new Login();
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -32,7 +32,7 @@ const Submain = () => (
       {/* <Route path="/account" component={account} /> */}
       <PrivateRoute path="/example" component={App}/>  
       <PrivateRoute path="/projectmanager/createproject" component={project}/> 
-      <Route exact path="/projectmanager/viewproject" component={table}/> 
+      <PrivateRoute exact path="/projectmanager/viewproject" component={table}/> 
     </Switch>
      
   </main>

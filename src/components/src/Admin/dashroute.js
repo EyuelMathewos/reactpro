@@ -1,9 +1,9 @@
 
 import React from 'react';
 //import ReactDOM from 'react-dom';
-import { WrappedRegistrationForm } from './Register.js'
+import { WrappedRegistrationForm } from './Register'
  import { WrapperAccountSetting } from './accountsetting'
-import { Login } from './login'
+import { Login } from '../../login'
 import {Route,Switch } from 'react-router-dom';
 
 

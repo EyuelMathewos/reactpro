@@ -8,7 +8,7 @@ import qs from 'qs';
 import auth from './auth';
 import { withRouter } from "react-router-dom";
 //import hello from './landingPage';
-import { SiderDemo } from './dashboard';
+import { SiderDemo } from './src/Admin/dashboard';
 import UserService from "../service/UserServices";
 import ClientSession from "../service/ClientSession";
 import Api from '../service/Api';
@@ -46,6 +46,7 @@ import {
                     checked: "yes"
                   },
                   () => {
+                    
                     console.log("hello world this is working yaa"+this.state.isLoggedIn);
                     return "do nothing";
                   }

@@ -1,48 +1,18 @@
 
 import React from 'react';
-// import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import '../index.css';
-import axios from 'axios';
-import Api from "../service/Api";
-import qs from 'qs'
+import '../../../index.css';
 import {
-  Form, Input, Tooltip, Icon, Cascader, Select, Button,
+  Form, Input, Tooltip, Icon, Select,  Button,
 } from 'antd';
 
 const { Option } = Select;
 
 
 
-const options = [
-  {
-    value: "Admin",
-    label: "Admin"
-  },
-  {
-    value: "projectManager",
-    label: "Project Manager"
-  }
-  ,
-  {
-    value: "siteEngineer",
-    label: "Site Engineer"
-  }
-  ,
-  {
-    value: "siteCoordinator",
-    label: "Site Coordinator"
-  }
-  ,
-  {
-    value: "finance",
-    label: "Finance"
-  }
 
-
-];
-
- class RegistrationForm extends React.Component {
+ class accountsetting extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
@@ -52,34 +22,10 @@ const options = [
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:4000/api/Accounts',qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
-        
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
         console.log('Received values of form: ', values);
-        console.log(qs.stringify(values, { filter: ['firstName','lastName','email','role','phoneNo','username','password'],arrayFormat: 'comma' }));
-
       }
     });
   }
-
-  // handleSubmit = (e) =>{
-  //   e.preventDefault();
-  //   this.props.form.validateFieldsAndScroll((err, values) => {
-  //     if (!err) {
-  //         Api.create("Accounts",qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
-  //         .then(response =>{
-  //           console.log("THE RESPONSE IS ", response.data)
-  //         })
-  //     }
-  //   });
-  // }
-
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;
@@ -103,11 +49,19 @@ const options = [
     callback();
   }
 
+  handleWebsiteChange = (value) => {
+    let autoCompleteResult;
+    if (!value) {
+      autoCompleteResult = [];
+    } else {
+      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
+    }
+    this.setState({ autoCompleteResult });
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
     
-
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -131,15 +85,13 @@ const options = [
       },
     };
     const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '251',
+      initialValue: '86',
     })(
-      <Select style={{ width: 80 }}>
-        <Option value="251">+251</Option>
+      <Select style={{ width: 70 }}>
         <Option value="86">+86</Option>
         <Option value="87">+87</Option>
       </Select>
     );
-
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -147,7 +99,7 @@ const options = [
         <Form.Item
         label="First Name" 
         >
-          {getFieldDecorator('firstName', {
+          {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input/>
@@ -157,30 +109,13 @@ const options = [
         <Form.Item
         label="Last Name"
         >
-          {getFieldDecorator('lastName', {
+          {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input/>
           )}
         </Form.Item>
-        <Form.Item
-          label={(
-            <span>
-              username&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
-        >
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </Form.Item>
 
-        
         <Form.Item
           label="E-mail"
         >
@@ -194,8 +129,22 @@ const options = [
             <Input />
           )}
         </Form.Item>
+
         <Form.Item
-          label="Password"
+          label="Old Password"
+        >
+          {getFieldDecorator('password', {
+            rules: [{
+              required: true, message: 'Please input your password!',
+            }, {
+              validator: this.validateToNextPassword,
+            }],
+          })(
+            <Input type="password" />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="New Password"
         >
           {getFieldDecorator('password', {
             rules: [{
@@ -220,37 +169,42 @@ const options = [
             <Input type="password" onBlur={this.handleConfirmBlur} />
           )}
         </Form.Item>
-                 
-         <Form.Item
+        <Form.Item
+          label={(
+            <span>
+              Nickname&nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+          {getFieldDecorator('nickname', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          })(
+            <Input />
+          )}
+        </Form.Item>
+        
+        <Form.Item
           label="Phone Number"
         >
-          {getFieldDecorator('phoneNo', {
+          {getFieldDecorator('phone', {
             rules: [{ required: true, message: 'Please input your phone number!' }],
           })(
             <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
           )}
-        </Form.Item> 
-
-               <Form.Item
-          label="Role"
-        >
-          {getFieldDecorator('role', {
-            initialValue: ['Admin'],
-            rules: [{ type: 'array', required: true, message: 'Please select your Role !' }],
-          })(
-            <Cascader options={options} />
-          )}
         </Form.Item>
-        
+
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Register</Button>
+          <Button type="primary" htmlType="submit">update</Button>
         </Form.Item>
       </Form>
     );
   }
 }
 
-export const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
+export const WrapperAccountSetting = Form.create({ name: 'register' })(accountsetting);
 
 //ReactDOM.render(<WrappedRegistrationForm />, document.getElementById('container'));
 //  const regist = props => {

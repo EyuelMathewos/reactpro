@@ -112,7 +112,7 @@ class Demo extends React.Component {
           })(<RangePicker onChange={onChange} />)}
         </Form.Item>
 
-        <Form.Item label="Select[multiple]">
+        {/* <Form.Item label="Select[multiple]">
           {getFieldDecorator("select-multiple", {
             rules: [
               {
@@ -131,7 +131,7 @@ class Demo extends React.Component {
               <Option value="blue">Blue</Option>
             </Select>
           )}
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item label="The deal made Doc">
           <div className="dropbox">

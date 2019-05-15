@@ -97,18 +97,25 @@ const DragableBodyRow = DropTarget(
 
 const columns = [
 {
-  title: 'projectName',
+  title: 'Project Name',
   dataIndex: 'projectName',
   key: 'projectName',
-}, {
-  title: 'Project Life Time',
-  dataIndex: 'projectLifeTime',
-  key: 'projectLifeTime',
 }, {
   title: 'Site Place',
   dataIndex: 'siteplace',
   key: 'siteplace',
-}];
+},
+{
+  title: 'Property Owner',
+  dataIndex: 'propertyowner',
+  key: 'propertyowner',
+}
+, {
+  title: 'Project Life Time',
+  dataIndex: 'projectLifeTime',
+  key: 'projectLifeTime',
+}
+];
 const dataSource = []
 
 class DragSortingTable extends React.Component {
@@ -200,7 +207,7 @@ class DragSortingTable extends React.Component {
       //     }
   
   // state = {
-  //   someData: null,
+  //   
   //   data: [{
   //     key: '1',
   //     name: 'John Brown',

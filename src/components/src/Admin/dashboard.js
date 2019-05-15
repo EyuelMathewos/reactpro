@@ -3,14 +3,14 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../../index.css';
 // import Main from './route';
 import Submain from './dashroute';
 
 import {
   Layout, Menu, Icon,
 } from 'antd';
-import auth from './auth';
+import auth from '../../auth';
 const {
   Header, Content, Footer, Sider,
 } = Layout;
