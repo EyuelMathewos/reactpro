@@ -16,6 +16,7 @@ import {table} from "./src/Project/viewProjects";
 import {landingpage} from './landingPage';
 import {projectManager} from './src/projectmanager';
 import {siteCoordinator} from './src/sitecoordinator';
+import {Events} from './src/Project/Tabel';
 //import {Demo} from "./src/Project/viewReport"
 let authuser = new auth();
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -48,7 +49,7 @@ const Main = () => (
       {/* <Route  path="/register" component={WrappedRegistrationForm} /> */}
       {/* <Route  path="/accountsetting" component={WrapperAccountSetting} /> */}
       <Route  path="/login" component={Login} />
-      
+      <Route  path="/table" component={Events} />
       <Route  path="/land" component={landingpage} />
       <Route path="/projectmanager" component={projectManager} />
       <Route path="/sitecoordinator" component={siteCoordinator} />

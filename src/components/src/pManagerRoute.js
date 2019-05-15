@@ -12,8 +12,8 @@ let logauth = new Login();
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props)=>(
    //need to auth.isAuthenticated to return boolean
-   
-   localStorage.getItem("auth")
+   //localStorage.getItem("auth")
+   true
    ?<Component {...props}/>
    : <Redirect to='/login'/>
   )

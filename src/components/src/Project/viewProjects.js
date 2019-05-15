@@ -9,40 +9,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import axios from 'axios';
 import qs from 'qs';
+import { isArray } from 'util';
 let dragingIndex = -1;
  let  proResponse;
 export class BodyRow extends React.Component {
   
-  componentDidMount () {
-    
-    var request = new XMLHttpRequest(); request.open('GET', '/table', true);
-    request.onload = () => {
-    if (request.status >= 200 && request.status < 400) {
-    // Success!
-    axios.get('http://localhost:4000/api/projects')
-    .then(function (projectResponse) {
-      //console.log(proresponse);
-      //console.log(JSON.stringify({ x: 5, y: 6 }));
-      // proResponse =projectResponse.data;
-      // console.log(proResponse[0]);
-     
-      
-      console.log(projectResponse);
-     // console.log("this is value"+proResponse.data[5]);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    this.setState({someData: request.responseText}) } else {
-            // We reached our target server, but it returned an error
-            // Possibly handle the error by changing your state.
-    } };
-    request.onerror = () => {
-    // There was a connection error of some sort.
-    // Possibly handle the error by changing your state.
-    };
-        request.send();
-      }
+
 
   render() {
     const {
@@ -123,40 +95,129 @@ const DragableBodyRow = DropTarget(
   )(BodyRow),
 );
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
+const columns = [
+{
+  title: 'projectName',
+  dataIndex: 'projectName',
+  key: 'projectName',
 }, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
+  title: 'Project Life Time',
+  dataIndex: 'projectLifeTime',
+  key: 'projectLifeTime',
 }, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
+  title: 'Site Place',
+  dataIndex: 'siteplace',
+  key: 'siteplace',
 }];
+const dataSource = []
 
 class DragSortingTable extends React.Component {
   
-  state = {
-    data: [{
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    }, {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    }, {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    }],
+  constructor(props) {
+    super(props);
+    this.state = {
+      datapro: [],
+      plainOptionsid:[]
+    };
   }
+  
+ 
+  componentDidMount () {
+    let component = this;
+    var request = new XMLHttpRequest(); request.open('GET', '/table', true);
+    request.onload = () => {
+    if (request.status >= 200 && request.status < 400) {
+    // Success!
+    
+    axios.get('http://localhost:4000/api/projects')
+    .then(function (projectResponse) {
+     // this.setState({ datapro: projectResponse.data[0]  });
+     component.setState({ datapro: projectResponse.data });
+      //console.log(proresponse);
+      //console.log(JSON.stringify({ x: 5, y: 6 }));
+       let data =projectResponse.data;
+      // console.log(proResponse[0]);
+     // this.setState({data: projectResponse.data});
+      
+      //console.log(JSON.stringify({data}));
+      //console.log("this is it"+proResponse);
+      console.log("this is the data");
+      console.log(projectResponse.data);
+      console.log(Array.isArray(projectResponse.data));
+      if(Array.isArray(projectResponse.data)){
+        dataSource.push(projectResponse.data)
+       
+      }
+  
+      console.log("this is the pushed data");
+      console.log(dataSource[0]);
+      console.log(dataSource[0][5]);
+      console.log("***********this is state value***********");
+      console.log(component.state.datapro);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    this.setState({someData: request.responseText}) } else {
+            // We reached our target server, but it returned an error
+            // Possibly handle the error by changing your state.
+    } };
+    request.onerror = () => {
+    // There was a connection error of some sort.
+    // Possibly handle the error by changing your state.
+    };
+        request.send();
+       } 
+       // componentDidMount () {
+    
+      //   var request = new XMLHttpRequest(); request.open('GET', '/table', true);
+      //   request.onload = () => {
+      //   if (request.status >= 200 && request.status < 400) {
+      //   // Success!
+      //   axios.get('http://localhost:4000/api/projects')
+      //   .then(function (projectResponse) {
+      //     //console.log(proresponse);
+      //     //console.log(JSON.stringify({ x: 5, y: 6 }));
+      //     // proResponse =projectResponse.data;
+      //     // console.log(proResponse[0]);
+         
+          
+      //     console.log(qs.stringify(projectResponse.data[5]);
+      //    // console.log("this is value"+proResponse.data[5]);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+      //   this.setState({someData: request.responseText}) } else {
+      //           // We reached our target server, but it returned an error
+      //           // Possibly handle the error by changing your state.
+      //   } };
+      //   request.onerror = () => {
+      //   // There was a connection error of some sort.
+      //   // Possibly handle the error by changing your state.
+      //   };
+      //       request.send();
+      //     }
+  
+  // state = {
+  //   someData: null,
+  //   data: [{
+  //     key: '1',
+  //     name: 'John Brown',
+  //     age: 32,
+  //     address: 'New York No. 1 Lake Park',
+  //   }, {
+  //     key: '2',
+  //     name: 'Jim Green',
+  //     age: 42,
+  //     address: 'London No. 1 Lake Park',
+  //   }, {
+  //     key: '3',
+  //     name: 'Joe Black',
+  //     age: 32,
+  //     address: 'Sidney No. 1 Lake Park',
+  //   }]
+  // }
 
   components = {
     body: {
@@ -183,13 +244,14 @@ class DragSortingTable extends React.Component {
      
       <Table
         columns={columns}
-        dataSource={this.state.data}
+        dataSource={this.state.datapro}
         components={this.components}
         onRow={(record, index) => ({
           index,
           moveRow: this.moveRow,
         })}
       />
+      
     );
       }
 }
