@@ -24,3 +24,12 @@
 .login-form-button {
   width: 100%;
 }
+.right {
+  float: right;
+  width: 130px;
+
+}
+.user{
+  color:white;
+  margin-left: 10px;
+}

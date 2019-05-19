@@ -12,13 +12,13 @@ import { SiderDemo } from './src/Admin/dashboard';
 import UserService from "../service/UserServices";
 import ClientSession from "../service/ClientSession";
 import Api from '../service/Api';
+import * as session from 'browser-session-store';
 import {
   Form, Icon, Input, Button, Checkbox, Card,message
 } from 'antd';
       let authuser = new auth();
   
  class login extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,7 @@ import {
                     checked: "yes"
                   },
                   () => {
-                    
+                    localStorage.setItem("authorized","true");
                     console.log("hello world this is working yaa"+this.state.isLoggedIn);
                     return "do nothing";
                   }
@@ -57,6 +57,8 @@ import {
               Api.find('accounts', response.user.userId, null)
               .then((getResponse) => {
                   console.log("response is", getResponse);
+                  session.put("userData", getResponse.data);
+                  let results=session.get("userData",(err, results) => (console.log("error occured")) );
                         //checking user loggedin the redirect to pages based on role
                         if(this.state.isLoggedIn){
                          if("admin"===getResponse.data.role){

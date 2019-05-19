@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 //import './index.css';
-import { Table } from 'antd';
+import { Table, Modal, message } from 'antd';
 import { DragDropContext, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
@@ -117,14 +117,39 @@ const columns = [
 }
 ];
 const dataSource = []
+function setProject(event) {
+  console.log(event);
+
+}
+export default function DataModal(displayableData,data) {
+  
+
+
+  Modal.confirm({
+      title: 'Do you want to select this project',
+      content: (
+       
+          <div className="modal_data_wrapper">
+          {displayableData}
+         </div>
+      ),
+      okText:"Set Project",
+       style: { top: 100, height: '83vh' },
+      width: '100%',
+      onOk() { 
+        localStorage.setItem("projectSelected",data);
+        message.success("you selected a project");
+      },
+  });
+}
+
 
 class DragSortingTable extends React.Component {
-  
+   
   constructor(props) {
     super(props);
     this.state = {
-      datapro: [],
-      plainOptionsid:[]
+      datapro: []
     };
   }
   
@@ -233,17 +258,18 @@ class DragSortingTable extends React.Component {
   }
 
   moveRow = (dragIndex, hoverIndex) => {
-    const { data } = this.state;
-    const dragRow = data[dragIndex];
+    const { datapro } = this.state;
+    const dragRow = datapro[dragIndex];
 
     this.setState(
       update(this.state, {
-        data: {
+        datapro: {
           $splice: [[dragIndex, 1], [hoverIndex, 0, dragRow]],
         },
       }),
     );
   }
+ 
 
   render() {
     
@@ -256,6 +282,11 @@ class DragSortingTable extends React.Component {
         onRow={(record, index) => ({
           index,
           moveRow: this.moveRow,
+          onClick: event => {
+              console.log(record);
+             
+              DataModal( qs.stringify(record, { filter: ['projectName','propertyowner','siteplace'],arrayFormat: 'comma' }),JSON.stringify(record));
+          }
         })}
       />
       

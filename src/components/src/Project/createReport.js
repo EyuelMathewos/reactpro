@@ -9,7 +9,7 @@ import { Form, Input, Select, Button, AutoComplete } from "antd";
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-class Schedule extends React.Component {
+class createReport extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: []
@@ -19,7 +19,7 @@ class Schedule extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:4000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
+        axios.post('http://localhost:4000/api/reports',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
         
         .then(function (response) {
           console.log(response);
@@ -73,31 +73,31 @@ class Schedule extends React.Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="Task To perform">
-          {getFieldDecorator("taskToPerform", {
+        <Form.Item label="work performed">
+          {getFieldDecorator("workperformed", {
             rules: [
               {
                 message: "The input is not valid !"
               },
               {
                 required: true,
-                message: "Please enter Task to perform!"
+                message: "Please enter task to perform!"
               }
             ]
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="Actual Time">
-          {getFieldDecorator("actualTime", {
+        <Form.Item label="Detail Activity Description">
+          {getFieldDecorator("detailedActivityDesc", {
             rules: [
               {
                 required: true,
-                message: "Please enter actual time!"
+                message: "Please Discribe detail activity performed!"
               }
             ]
           })(<Input/>)}
         </Form.Item>
-        <Form.Item label="Perfomance Per Day">
-          {getFieldDecorator("performancePerDay", {
+        <Form.Item label="Actual Time">
+          {getFieldDecorator("actualTime", {
             rules: [
               {
                 required: true,
@@ -119,10 +119,20 @@ class Schedule extends React.Component {
             ]
           })(<Input/>)}
         </Form.Item>
+        <Form.Item label="Price used">
+          {getFieldDecorator("usedPrice", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter the planned price!"
+              }
+            ]
+          })(<Input/>)}
+        </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Enter Schedule
+            Enter Report
           </Button>
         </Form.Item>
       </Form>
@@ -131,4 +141,4 @@ class Schedule extends React.Component {
 }
 
 //export const Report = Form.create({ name: "report" })(report);
-export const schedule = Form.create({ name: 'create Schedule' })(Schedule);
+export const createreport = Form.create({ name: 'create Schedule' })(createReport);

@@ -4,8 +4,8 @@ import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 //import '../../../index.css';
-// import Main from './route';
-//import Submain from '../../../dashroute';
+ import Main from '../../route';
+import Submain from '../../src/Admin/dashroute';
 
 import {
   Layout, Menu, Icon,
@@ -50,21 +50,21 @@ export class siteEngineer extends React.Component {
             {/* onClick={() => alert("clicked")} */}
               <Icon type="desktop" />
               <span>View Projects</span>
-              <Link to="/" />
+              <Link to="/siteengineer/viewproject" />
             </Menu.Item>
             <SubMenu
               key="sub1"
               title={<span><Icon type="user" /><span>Schedule</span></span>}
             >
-              <Menu.Item key="3">create Schedule<Link to="/dashboard/accountsetting"/></Menu.Item>
-              <Menu.Item key="4">view Schedule<Link to="/dashboard/"/></Menu.Item>
+              <Menu.Item key="3">create Schedule<Link to="/siteengineer/createschedule"/></Menu.Item>
+              <Menu.Item key="4">view Schedule<Link to="/siteengineer/viewschedule/"/></Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub1"
               title={<span><Icon type="user" /><span>Send Report</span></span>}
             >
-              <Menu.Item key="3">create Report<Link to="/dashboard/accountsetting"/></Menu.Item>
-              <Menu.Item key="4">Edit Report<Link to="/dashboard/"/></Menu.Item>
+              <Menu.Item key="5">create Report<Link to="/siteengineer/createreport"/></Menu.Item>
+              <Menu.Item key="6">Edit Report<Link to="/siteengineer/editreport"/></Menu.Item>
             </SubMenu>
             
           </Menu>
@@ -80,7 +80,7 @@ export class siteEngineer extends React.Component {
               Bill is a cat.
             </div> */}
             {/* <Main/> */}
-             {/* <Submain/> */}
+             <Submain/>
             
           </Content>
           <Footer style={{ textAlign: 'center' }}>

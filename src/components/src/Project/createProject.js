@@ -20,7 +20,7 @@ const { Option } = Select;
 const options = [
   {
     value: "addisAbaba",
-    label: "Addis Abeba"
+    label: "Addis Ababa"
   },
   {
     value: "adama",

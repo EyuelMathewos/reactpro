@@ -210,13 +210,16 @@ class UserService {
                       ClientSession.removeAuth(err => {
                           err ? console.log(err) : ''
                       });
+                      localStorage.clear
+                    //   localStorage.removeItem("authorized");
+                    //   localStorage.removeItem("projectSelected");
                       window.location = "login";
                   });
           }
       });
   };
 
-  static changeTeachersPassword = (password,accessToken) =>{
+  static changePassword = (password,accessToken) =>{
 
       if(password){
           return Api.create('users/reset-password' + accessToken, {"newPassword":password} )
