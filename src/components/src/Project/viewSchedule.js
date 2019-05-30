@@ -38,12 +38,6 @@ const columns =  [{
   title: 'Price to the task',
   dataIndex: 'planedPrice',
   width: 100,
-}, {
-  title: 'Edit Task',
-  key: 'action',
-  render: () => (
-    <a href="javascript:;">Edit</a>
-  ),
 }]
 
 export default function DataModal(displayableData,data) {
@@ -51,7 +45,7 @@ export default function DataModal(displayableData,data) {
 
 
   Modal.info({
-      title: 'Do you want to select this project',
+      title: 'Schedule',
       content: (
        
           <div className="modal_data_wrapper">

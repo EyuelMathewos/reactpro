@@ -6,7 +6,8 @@ import 'antd/dist/antd.css';
 //import '../../../index.css';
 // import Main from './route';
 //import Submain from '../../../dashroute';
-
+import {TopHeader} from '../Header/topHeader';
+import Submain from './coordRoute';
 import {
   Layout, Menu, Icon,
 } from 'antd';
@@ -50,20 +51,23 @@ export class siteCoordinator extends React.Component {
             {/* onClick={() => alert("clicked")} */}
               <Icon type="desktop" />
               <span>View Projects</span>
-              <Link to="/" />
+              <Link to="/sitecoordinator/viewproject" />
             </Menu.Item>
             <SubMenu
               key="sub1"
               title={<span><Icon type="user" /><span>Report</span></span>}
-            >
-              <Menu.Item key="3">View Report<Link to="/dashboard/accountsetting"/></Menu.Item>
-              <Menu.Item key="4">Edit Report<Link to="/dashboard/"/></Menu.Item>
+            >  
+              <Menu.Item key="3">View Schedule<Link to="/sitecoordinator/viewschedule"/></Menu.Item>
+              <Menu.Item key="4">View Report<Link to="/sitecoordinator/viewreport"/></Menu.Item>
+              <Menu.Item key="5">Observation Report<Link to=""/></Menu.Item>
             </SubMenu>
             
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          {/* <Header style={{ background: '', padding: 0 }} > */}
+          <TopHeader/>
+          {/* </Header> */}
           <Content style={{ margin: '0 16px' }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
@@ -73,7 +77,7 @@ export class siteCoordinator extends React.Component {
               Bill is a cat.
             </div> */}
             {/* <Main/> */}
-             {/* <Submain/> */}
+             <Submain/>
             
           </Content>
           <Footer style={{ textAlign: 'center' }}>

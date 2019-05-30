@@ -6,7 +6,9 @@ import '../../../index.css';
 import {
   Form, Input, Tooltip, Icon, Select,  Button,
 } from 'antd';
-
+import qs from 'qs';
+import axios from 'axios';
+import Api from "../../../service/Api";
 const { Option } = Select;
 
 
@@ -22,7 +24,17 @@ const { Option } = Select;
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        axios.patch('http://localhost:4000/api/Accounts',qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
+        
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
         console.log('Received values of form: ', values);
+        console.log(qs.stringify(values, { filter: ['firstName','lastName','email','role','phoneNo','username','password'],arrayFormat: 'comma' }));
       }
     });
   }
@@ -99,7 +111,7 @@ const { Option } = Select;
         <Form.Item
         label="First Name" 
         >
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('firstName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input/>
@@ -109,10 +121,26 @@ const { Option } = Select;
         <Form.Item
         label="Last Name"
         >
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('lastName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input/>
+          )}
+        </Form.Item>
+        <Form.Item
+          label={(
+            <span>
+              username&nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!', whitespace: true }],
+          })(
+            <Input />
           )}
         </Form.Item>
 
@@ -133,7 +161,7 @@ const { Option } = Select;
         <Form.Item
           label="Old Password"
         >
-          {getFieldDecorator('password', {
+          {getFieldDecorator('oldPassword', {
             rules: [{
               required: true, message: 'Please input your password!',
             }, {
@@ -168,24 +196,7 @@ const { Option } = Select;
           })(
             <Input type="password" onBlur={this.handleConfirmBlur} />
           )}
-        </Form.Item>
-        <Form.Item
-          label={(
-            <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
-        >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </Form.Item>
-        
+        </Form.Item>        
         <Form.Item
           label="Phone Number"
         >

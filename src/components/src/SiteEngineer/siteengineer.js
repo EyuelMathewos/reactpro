@@ -4,8 +4,10 @@ import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 //import '../../../index.css';
+import {TopHeader} from '../Header/topHeader'
  import Main from '../../route';
-import Submain from '../../src/Admin/dashroute';
+import Submain from './engRoute';
+
 
 import {
   Layout, Menu, Icon,
@@ -60,17 +62,19 @@ export class siteEngineer extends React.Component {
               <Menu.Item key="4">view Schedule<Link to="/siteengineer/viewschedule/"/></Menu.Item>
             </SubMenu>
             <SubMenu
-              key="sub1"
+              key="sub2"
               title={<span><Icon type="user" /><span>Send Report</span></span>}
             >
               <Menu.Item key="5">create Report<Link to="/siteengineer/createreport"/></Menu.Item>
-              <Menu.Item key="6">Edit Report<Link to="/siteengineer/editreport"/></Menu.Item>
+              <Menu.Item key="6">View Report<Link to="/siteengineer/viewreport"/></Menu.Item>
             </SubMenu>
             
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          {/* <Header style={{ background: '', padding: 0 }} > */} 
+          <TopHeader/>
+          {/* </Header> */}
           <Content style={{ margin: '0 16px' }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>

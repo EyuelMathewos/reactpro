@@ -148,7 +148,7 @@ const options = [
         label="First Name" 
         >
           {getFieldDecorator('firstName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+            rules: [{ required: true, message: 'Please input your first name!' }],
           })(
             <Input/>
           )}
@@ -158,7 +158,7 @@ const options = [
         label="Last Name"
         >
           {getFieldDecorator('lastName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+            rules: [{ required: true, message: 'Please input your last name!' }],
           })(
             <Input/>
           )}

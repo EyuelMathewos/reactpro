@@ -210,9 +210,9 @@ class UserService {
                       ClientSession.removeAuth(err => {
                           err ? console.log(err) : ''
                       });
-                      localStorage.clear
-                    //   localStorage.removeItem("authorized");
-                    //   localStorage.removeItem("projectSelected");
+                       //localStorage.clear;
+                        localStorage.removeItem("authorized");
+                        localStorage.removeItem("projectSelected");
                       window.location = "login";
                   });
           }

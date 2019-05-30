@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import axios from 'axios';
 import qs from 'qs';
+import {TopHeader} from '../Header/topHeader'
 import { isArray } from 'util';
 let dragingIndex = -1;
  let  proResponse;
@@ -139,6 +140,8 @@ export default function DataModal(displayableData,data) {
       onOk() { 
         localStorage.setItem("projectSelected",data);
         message.success("you selected a project");
+        window.location.reload();
+        
       },
   });
 }
@@ -149,7 +152,10 @@ class DragSortingTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datapro: []
+      datapro: [],
+      projectName: "",
+      
+
     };
   }
   

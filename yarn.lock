@@ -6767,7 +6767,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.2:
+prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7553,6 +7553,13 @@ react-slick@~0.23.2:
     lodash.debounce "^4.0.8"
     prettier "^1.14.3"
     resize-observer-polyfill "^1.5.0"
+
+react-timelines@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-timelines/-/react-timelines-2.5.2.tgz#39113f8bdda62f690499209634469e4b8d502656"
+  integrity sha512-jDQQgf+E9NeE+Ww8D57r8/Sm+MrKzbagCpUQFWpOl+INqDtvDRdOO6yA4MYIakNlu08ewH4Eehmf9WEfiKkjsQ==
+  dependencies:
+    prop-types "^15.6.1"
 
 react@latest:
   version "16.8.6"

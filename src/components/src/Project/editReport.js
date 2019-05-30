@@ -35,13 +35,15 @@ const columns =  [{
   title: 'Detail Description',
   dataIndex: 'detailedActivityDesc',
   width: 100,
-}, {
-  title: 'Action',
-  key: 'action',
-  render: () => (
-    <a href="javascript:;">Edit</a>
-  ),
-}]
+}, 
+// {
+//   title: 'Action',
+//   key: 'action',
+//   render: () => (
+//     <a href="javascript:;">Edit</a>
+//   ),
+// }
+]
 export class editReport extends React.Component {
   constructor(props) {
     super(props);

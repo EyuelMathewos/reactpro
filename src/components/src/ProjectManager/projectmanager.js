@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import * as session from 'browser-session-store';
 import UserService from "../../../service/UserServices";
 import Submain from './pManagerRoute';
+import {TopHeader} from '../Header/topHeader';
 import {
   Layout, Menu, Icon, Avatar, Button, Affix, Dropdown, Drawer
 } from 'antd';
@@ -25,7 +26,7 @@ const menu = (
     <a href="http://localhost:3000/projectmanager/accountsetting"> Account</a>
     </div>
     </Menu.Item>
-    <Menu.Item onClick={() => { this.projectManager.showDrawer(); }}>        
+    <Menu.Item onClick={() => { console.log("account setting has been clicked") }}>        
     <Icon type="user" />
     <span>Account setting</span>
     <Link to="/projectmanager/viewproject" />
@@ -127,7 +128,8 @@ export class projectManager extends React.Component {
               <Link to="/projectmanager/createproject"/>
               </Menu.Item>
               <Menu.Item key="8">
-              Approve Request
+              Requests
+              <Link to="/projectmanager/request"/>
               </Menu.Item>
               <Menu.Item key="9">
               View Schedule
@@ -144,7 +146,7 @@ export class projectManager extends React.Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ padding: 0 }}>
+          {/* <Header style={{ padding: 0 }}>
           <div className="right">    
           <Dropdown overlay={menu} trigger={['click']}>
           <section>
@@ -153,7 +155,8 @@ export class projectManager extends React.Component {
           </section>
           </Dropdown>
           </div>
-          </Header>
+          </Header> */}
+          <TopHeader/>
           <Content style={{ margin: '0 16px' }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>

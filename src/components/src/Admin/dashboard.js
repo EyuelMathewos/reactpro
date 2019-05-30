@@ -5,6 +5,7 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import '../../../index.css';
 // import Main from './route';
+import { AdminHeader } from './adminHeader';
 import Submain from './dashroute';
 
 import {
@@ -50,34 +51,27 @@ export class SiderDemo extends React.Component {
               <span>Dashboard</span>
               <Link to="/dashboard" />
             </Menu.Item>
-            <Menu.Item key="2">
-            {/* onClick={() => alert("clicked")} */}
-              <Icon type="desktop" />
-              <span>Option 2</span>
-              <Link to="/" />
-            </Menu.Item>
             <SubMenu
               key="sub1"
               title={<span><Icon type="user" /><span>My Account</span></span>}
             >
-              <Menu.Item key="3">Account Settings<Link to="/dashboard/accountsetting"/></Menu.Item>
+              <Menu.Item key="2">Account Settings<Link to="/dashboard/accountsetting"/></Menu.Item>
 
             </SubMenu>
             <SubMenu
               key="sub2"
               title={<span><Icon type="team" /><span>Manage Accont</span></span>}
             >
-              <Menu.Item key="6">Register User<Link to="/dashboard/register"/></Menu.Item>
-              <Menu.Item key="8">Deactivate User</Menu.Item>
+              <Menu.Item key="3">Register User<Link to="/dashboard/register"/></Menu.Item>
+              {/* <Menu.Item key="8">Deactivate User</Menu.Item> */}
             </SubMenu>
-            <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
+
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          {/* <Header style={{ background: '', padding: 0 }}> */}
+          <AdminHeader/>
+          {/* </Header> */}
           <Content style={{ margin: '0 16px' }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>

@@ -13,7 +13,7 @@ import {createschedule} from "./src/Project/createSchedule";
 import * as session from 'browser-session-store';
 import App from './example';
 import auth from "./auth";
-import {table} from "./src/Project/viewProjects";
+ import {table} from "./src/Project/viewProjects";
 import {landingpage} from './landingPage';
 import {projectManager} from './src/ProjectManager/projectmanager';
 import {siteCoordinator} from './src/SiteCoordinator/sitecoordinator';
@@ -40,6 +40,7 @@ const Main = () => (
   <main>
     
     <Switch>
+    /sitecoordinator/viewproject
       <Route  path="/dashboard" component={SiderDemo} />  
       <Route exact path="/" component={home} />
       <Route exact path="/project" component={project} />
@@ -57,7 +58,7 @@ const Main = () => (
       <PrivateRoute exact path="/siteengineer" component={siteEngineer}/>
       <PrivateRoute path="/sitecoordinator" component={siteCoordinator} />
       <PrivateRoute path="/example" component={App}/>
-      {/* <Route exact path="/projectmanager/viewproject" component={table}/>  */}
+      <Route exact path="/siteengineer/viewproject" component={table}/> 
     </Switch>
   </main>
   
