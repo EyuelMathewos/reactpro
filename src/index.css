@@ -12,7 +12,10 @@
   margin: 16px 24px 16px 0;
   float: left;
 }
-
+.Menu{
+  
+  margin-right: 10px;
+}
 /* this is for login */
 
 .login-form {

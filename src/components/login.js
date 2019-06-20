@@ -58,7 +58,7 @@ import {
               .then((getResponse) => {
                   console.log("response is", getResponse);
                   session.put("userData", getResponse.data);
-                  let results=session.get("userData",(err, results) => (console.log("error occured")) );
+                  let results=session.get("userData",(err, results) => (console.log(results)) );
                         //checking user loggedin the redirect to pages based on role
                         if(this.state.isLoggedIn){
                          if("admin"===getResponse.data.role){
@@ -88,7 +88,7 @@ import {
             }
           })
           .catch(error => {
-            message.error(error.message);
+            message.error("Incorrect username or password");
           });
           //end of getting user role and user information
       }

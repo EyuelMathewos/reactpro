@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "../../../index.css";
-import { Table, Button ,Divider, Icon,Popconfirm } from "antd";
+import { Table, Button ,Divider, Icon,message } from "antd";
 import { Resizable } from "react-resizable";
 import axios from 'axios';
 import qs from 'qs';
@@ -20,26 +20,83 @@ const ResizeableTitle = props => {
     </Resizable>
   );
 };
-let approved;
-
+let value=[];
 const dataSource = []
 function hello(data){
   console.log("you clicked a button"+data)
 }
+function approveAction(data){
+  axios.get('http://localhost:4000/api/approvals?filter={"where": {"approvalRequestId": '+data+'}}')
+  .then(function (response) {
+    if(response.data[0].approved){
+      //console.log(data);
+      message.error("You Already Approved It"); 
+      console.log("you already approved it")
+    }else{
+
+      console.log('http://localhost:4000/api/approvals/'+response.data[0].approvalid);
+      axios.patch('http://localhost:4000/api/approvals/'+response.data[0].approvalid,{"approved": true})
+      .then(function (response) {
+        message.success("You Approve This Request");
+        console.log(response.data)
+        console.log("ehh hello world")
+         })
+      .catch(function (error) {
+    console.log(error);
+     });
+
+    }
+    console.log(response.data[0].approved); 
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  //console.log("you clicked a button")
+  //console.log(data)
+
+}
+function disapproveAction(data){
+  console.log(data);
+  axios.get('http://localhost:4000/api/approvals?filter={"where": {"approvalRequestId": '+data+'}}')
+  .then(function (response) {
+    console.log(response.data[0].approvalid);
+    if(response.data[0].approved){
+      console.log('http://localhost:4000/api/approvals/'+response.data[0].approvalid);
+        axios.patch('http://localhost:4000/api/approvals/'+response.data[0].approvalid,{"approved": false})
+        .then(function (response) {
+          message.success("You Disapproved This Request");
+          console.log(response.data)
+           })
+        .catch(function (error) {
+      console.log(error);
+       });
+    }else{
+      message.error("You Already Disapproved It"); 
+      console.log("you already disapproved it")
+    }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  console.log("you clicked a button")
+  console.log(data)
+
+}
+
 
 export class request extends React.Component {
   constructor(props) {
     super(props);
+    let approved;
+
     this.state = {
-      datapro: [],
-      approved:true
+      datapro: []
+      
     };
   }
-  // check(){
-  //   this.setState({
-  //     approved:false
-  //   })
-  // }
+
   
   columns= [
     {
@@ -53,10 +110,15 @@ export class request extends React.Component {
     {
       title: 'Approve',
       align: 'center',
+      dataIndex: "approvals",
       width:100,
       
       render: (text, record) =>{
+      
         console.log("**********this is the record data ************");
+        console.log(record);
+        console.log(record.requestProjectId);
+        console.log(record.approvals.approved)
         console.log(JSON.stringify(record.requestProjectId));
         let requestId=JSON.stringify(record.RequestId);
         console.log(''+requestId+'');
@@ -67,16 +129,16 @@ export class request extends React.Component {
           console.log("*********this is include feched data*************");
           console.log(response.data);
           //console.log(response.data[0].approvals.approved);
-          approved=response.data[0].approvals.approved;
-          console.log("this is the value"+approved)
+          window.approved=response.data[0].approvals.approved;
+         // console.log("this is the value"+approved)
           console.log("*********this is the end*************");
           
         })
         .catch(function (error) {
           console.log(error);
         });
-  
-        if(!(this.state.approved)){return(<Button type="primary" onClick={()=>{hello(JSON.stringify(record))}}>Approve</Button>) }
+        //console.log("this is the window test"+approved)//.replace("\"", "")
+        if(!record.approvals.approved){return(<Button type="primary" onClick={()=>{approveAction(JSON.stringify(record.RequestId))}}>Approve</Button>) }
         else{
           return(<Button disabled type="primary">Approved</Button>)
         }
@@ -87,17 +149,13 @@ export class request extends React.Component {
     {
       title: 'Disapprove',
       align: 'center',
+      dataIndex: "approvals",
       width:100,
       render: (text, record) =>{
-        let component = this;
-        function check (){
-          if(component.state.approved){
-            component.setState(function(prevState, props){
-              return {approved: !prevState.approved}
-              });
-          }
-          //component.setState({approved: false})
-        }
+        //let value=[];
+        let component=this;
+     
+
         console.log("**********this is the record data ************");
         console.log(JSON.stringify(record.requestProjectId));
         let requestId=JSON.stringify(record.RequestId);
@@ -110,30 +168,30 @@ export class request extends React.Component {
           console.log("*********this is include feched data*************");
           console.log(response.data);
           //console.log(response.data[0].approvals.approved);
-          approved=response.data[0].approvals.approved;
-
+          //let approved;
+          //global.approved=response.data[0].approvals.approved;       
         //  approved=true;
           //  if(approved){
           //   // component.setState({approved: false})
           //   ()=>{component.setState({approved: false})
           //   }
-          //component.check.bind(this);
-          if(approved){
+       
+            
+            
           
-          }else{
-           // check();
-          }
+          //let approveds=component.approved;
         
-          console.log("this is the value"+approved)
           console.log("*********this is the end*************");
           
         })
         .catch(function (error) {
           console.log(error);
         });
-        console.log("is this data is /"+this.state.approved);
-        if(this.state.approved){
-          return(<Button type="danger" onClick={()=>{hello(JSON.stringify(record))}}>Disapprove</Button>)
+       
+        //console.log("is this data is /"+window.approved);
+        
+        if(record.approvals.approved){
+          return(<Button type="danger" onClick={()=>{disapproveAction(JSON.stringify(record.RequestId))}}>Disapprove</Button>)
          }
         else{
           return(<Button disabled type="primary">Disapproved</Button>)
@@ -147,12 +205,16 @@ export class request extends React.Component {
 
   componentDidMount () {
     let component = this;
+    let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
+    console.log(projectSelected);
     var request = new XMLHttpRequest(); request.open('GET', '/table', true);
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    
-    axios.get('http://localhost:4000/api/Requests')
+    //axios.get('http://localhost:4000/api/Requests')
+    //axios.get('http://localhost:4000/api/projects/5cdc43bab951ca03c8924fff/requests')
+    if(projectSelected!==null){
+    axios.get('http://localhost:4000/api/projects/'+projectSelected.projectId+'/requests?filter={"include": {"relation": "approvals"}}')
     .then(function (projectResponse) {
      // this.setState({ datapro: projectResponse.data[0]  });
      component.setState({ datapro: projectResponse.data });
@@ -166,11 +228,11 @@ export class request extends React.Component {
       //console.log("this is it"+proResponse);
       console.log("this is the data");
       console.log(projectResponse.data);
-      console.log(Array.isArray(projectResponse.data));
-      if(Array.isArray(projectResponse.data)){
-        dataSource.push(projectResponse.data)
+     // console.log(Array.isArray(projectResponse.data));
+      // if(Array.isArray(projectResponse.data)){
+      //   dataSource.push(projectResponse.data)
        
-      }
+      // }
   
       console.log("this is the pushed data");
       // console.log(dataSource[0]);
@@ -181,6 +243,7 @@ export class request extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
+  }
     this.setState({someData: request.responseText}) } else {
             // We reached our target server, but it returned an error
             // Possibly handle the error by changing your state.

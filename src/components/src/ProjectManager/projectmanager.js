@@ -18,57 +18,11 @@ const {
 } = Layout;
 
 const SubMenu = Menu.SubMenu;
-const menu = (
-  <Menu theme="dark">
-    <Menu.Item key="9">
-    <div>
-    <Icon type="user" />
-    <a href="http://localhost:3000/projectmanager/accountsetting"> Account</a>
-    </div>
-    </Menu.Item>
-    <Menu.Item onClick={() => { console.log("account setting has been clicked") }}>        
-    <Icon type="user" />
-    <span>Account setting</span>
-    <Link to="/projectmanager/viewproject" />
-    </Menu.Item>
-    <Menu.Item onClick={() => { UserService.logout(); }}>
-    <Icon type="logout" />
-    <span>logout</span>
-    </Menu.Item>
 
-  </Menu>
-);
-console.log("this is the user data");
-//let results=session.get("userData",(err, results) => (console.log("error occured")) );
-//console.log(localStorage.getItem("projectSelected"));
-//console.log(results);
-function drawercall() {
-  
-  // var localdata=JSON.parse(session.get("userData"));
-  // var localuserdata=JSON.parse(localStorage.getItem("projectSelected"));
-  // console.log(localdata);
-  var localuserdata=JSON.parse(sessionStorage.getItem('userData'));
-  console.log(localuserdata);
-
-  return (
-      <div>
-        <center>
-       <p><b>User Name</b></p>
-       <p>{localuserdata.username} </p>
-       <p><b>First Name</b></p>
-       <p>{localuserdata.firstName} </p>
-       <p><b>Middle Name</b></p>
-       <p>{localuserdata.lastName} </p>
-       <p><b>Role</b></p>
-       <p>{localuserdata.role} </p>
-       <p><b>Email</b></p>
-       <p>{localuserdata.email} </p>
-       </center>
-      </div>
-    
-  );
-}
-let glob=this;
+// console.log("this is the user data");
+// let results=session.get("userData",(err, results) => (console.log("error occured")) );
+// console.log(localStorage.getItem("projectSelected"));
+// console.log(results);
 export class projectManager extends React.Component {
 
   state = {
@@ -121,7 +75,7 @@ export class projectManager extends React.Component {
             
             <SubMenu
               key="sub2"
-              title={<span><Icon type="team" /><span>Manage Project</span></span>}
+              title={<span><Icon type="project" /><span>Manage Project</span></span>}
             >
               <Menu.Item key="6">
               Create Project
@@ -138,6 +92,10 @@ export class projectManager extends React.Component {
               <Menu.Item key="10">
               <span>view Report</span>
               <Link to="/projectmanager/viewreport" />
+              </Menu.Item>
+              <Menu.Item key="11">
+              <span>User Access</span>
+              <Link to="/projectmanager/useraccess" />
               </Menu.Item>
             
 
@@ -167,18 +125,9 @@ export class projectManager extends React.Component {
             </div> */}
             {/* <Main/> */}
              <Submain/>
-             <Drawer
-          title="User Profile"
-          placement="right"
-          closable={true}
-          onClose={this.onClose}
-          visible={this.state.visible}
-          
-        >   {drawercall()}
-        </Drawer>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
+            {/* Ant Design ©2018 Created by Ant UED */}
           </Footer>
         </Layout>
       </Layout>

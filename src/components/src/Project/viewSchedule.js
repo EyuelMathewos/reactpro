@@ -38,6 +38,11 @@ const columns =  [{
   title: 'Price to the task',
   dataIndex: 'planedPrice',
   width: 100,
+},
+{
+  title: 'Schedulte Life Time',
+  dataIndex: 'scheduleLifeTime',
+  width: 100,
 }]
 
 export default function DataModal(displayableData,data) {
@@ -55,6 +60,8 @@ export default function DataModal(displayableData,data) {
           <p>{data.actualTime}</p>
           <h4>Performace Per Day</h4>
           <p>{data.performancePerDay}</p>
+          <h4>Schedule Life Time</h4>
+          <p>{data.scheduleLifeTime}</p>
          </div>
       ),
        style: { top: 100, height: '83vh' },
@@ -76,12 +83,15 @@ export class viewSchedule extends React.Component {
 
   componentDidMount () {
     let component = this;
+    let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
+    console.log(projectSelected);
     var request = new XMLHttpRequest(); request.open('GET', '/table', true);
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    
-    axios.get('http://localhost:4000/api/schedules')
+    //axios.get('http://localhost:4000/api/schedules')
+    if(projectSelected!==null){
+    axios.get('http://localhost:4000/api/projects/'+projectSelected.projectId+'/schedules')
     .then(function (reportResponse) {
      // this.setState({ datapro: projectResponse.data[0]  });
      component.setState({ data: reportResponse.data });
@@ -110,6 +120,7 @@ export class viewSchedule extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
+  }
     this.setState({someData: request.responseText}) } else {
             // We reached our target server, but it returned an error
             // Possibly handle the error by changing your state.

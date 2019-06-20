@@ -4,11 +4,14 @@ import "antd/dist/antd.css";
 import "../../../index.css";
 import axios from 'axios';
 import qs from 'qs';
-import { Form, Input, Select, Button, AutoComplete } from "antd";
+import { Form, Input, Select, Button, AutoComplete, DatePicker } from "antd";
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
-
+const { RangePicker } = DatePicker;
+function onChange(date, dateString) {
+  console.log(date, dateString);
+}
 class createSchedule extends React.Component {
   state = {
     confirmDirty: false,
@@ -19,7 +22,11 @@ class createSchedule extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:4000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
+        let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
+        console.log(projectSelected);
+        if(projectSelected!==null){
+       //axios.post('http://localhost:4000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
+        axios.post('http://localhost:4000/api/projects/'+projectSelected.projectId+'/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice','scheduleLifeTime'],arrayFormat: 'comma' }))
         
         .then(function (response) {
           console.log(response);
@@ -27,7 +34,7 @@ class createSchedule extends React.Component {
         .catch(function (error) {
           console.log(error);
         });
-
+          }
         console.log('Received values of form: ', values);
         console.log(qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }));
 
@@ -118,6 +125,12 @@ class createSchedule extends React.Component {
               }
             ]
           })(<Input/>)}
+        </Form.Item>
+
+        <Form.Item label="Task Life Time">
+          {getFieldDecorator("scheduleLifeTime", {
+            rules: [{ required: true, message: "Please input your username!" }]
+          })(<RangePicker onChange={onChange} />)}
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>

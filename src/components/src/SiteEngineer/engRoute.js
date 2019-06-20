@@ -7,12 +7,15 @@ import { WrapperAccountSetting } from '../Admin/accountsetting';
 //import auth from "../../auth";
 import { Login } from '../../login';
 import { project } from '../Project/createProject';
-import {table} from "../Project/viewProjects";
+//import {table} from "../Project/viewProjects";
+import {table} from "./engProjects"
 import {createreport} from "../Project/createReport"
 import {viewReport} from "../Project/viewReport";
 import {createschedule} from "../Project/createSchedule";
 import {viewSchedule} from "../Project/viewSchedule";
 import {request} from "../Project/request";
+import {createrequest} from "../Project/createRequest"
+import {createreq} from "../Project/createReq"
 let logauth = new Login();
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -41,8 +44,9 @@ const Submain = () => (
       <Route exact path="/siteengineer/createschedule" component={createschedule}/>
       <Route exact path="/siteengineer/viewproject" component={table}/>
       <Route path="/siteengineer/createreport" component={createreport} /> 
-      <Route exact path="/siteengineer/viewreport" component={viewReport}/> 
-      
+      <Route exact path="/siteengineer/viewreport" component={viewReport}/>
+      <Route exact path="/siteengineer/createrequest" component={createrequest}/>  
+      <Route path="/siteengineer/createreq" component={createreq}/>
       <Route exact path="/siteengineer/viewschedule" component={viewSchedule}/>
       <Route exact path="/siteengineer/request" component={request}/>
     </Switch>

@@ -9,7 +9,8 @@ import {editReport} from "../Project/editReport"
 import {viewSchedule} from "../Project/viewSchedule"
 import {createschedule} from "../Project/createSchedule";
 import {table} from "../Project/viewProjects";
-import {createreport} from "../Project/createReport"
+import {createreport} from "../Project/createReport";
+import { users } from './Users';
 // import {frontDashboard} from "./frontDashboard"
 // import {createreport} from "../Project/createReport"
 
@@ -26,7 +27,8 @@ const Submain = () => (
       <Route exact path="/siteengineer/viewproject" component={table}/> 
       <Route  path="/dashboard/register" component={WrappedRegistrationForm} />
       <Route  path="/dashboard/accountsetting" component={WrapperAccountSetting} />
-      <Route  path="/dashboard/login" component={Login} />    
+      <Route path="/dashboard/users" component={users}/>
+      <Route  path="/login" component={Login} />    
     </Switch>
   
   </main>

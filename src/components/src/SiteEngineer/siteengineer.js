@@ -5,7 +5,7 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 //import '../../../index.css';
 import {TopHeader} from '../Header/topHeader'
- import Main from '../../route';
+ //import Main from '../../route';
 import Submain from './engRoute';
 
 
@@ -56,18 +56,23 @@ export class siteEngineer extends React.Component {
             </Menu.Item>
             <SubMenu
               key="sub1"
-              title={<span><Icon type="user" /><span>Schedule</span></span>}
+              title={<span><Icon type="schedule" /><span>Schedule</span></span>}
             >
               <Menu.Item key="3">create Schedule<Link to="/siteengineer/createschedule"/></Menu.Item>
               <Menu.Item key="4">view Schedule<Link to="/siteengineer/viewschedule/"/></Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub2"
-              title={<span><Icon type="user" /><span>Send Report</span></span>}
+              title={<span><Icon type="form" /><span>Send Report</span></span>}
             >
               <Menu.Item key="5">create Report<Link to="/siteengineer/createreport"/></Menu.Item>
               <Menu.Item key="6">View Report<Link to="/siteengineer/viewreport"/></Menu.Item>
             </SubMenu>
+            <Menu.Item key="7">
+              <Icon type="edit" />
+              <span>Request</span>
+              <Link to="/siteengineer/createrequest" />
+            </Menu.Item>
             
           </Menu>
         </Sider>
@@ -88,7 +93,7 @@ export class siteEngineer extends React.Component {
             
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
+            {/* Ant Design ©2018 Created by Ant UED */}
           </Footer>
         </Layout>
       </Layout>

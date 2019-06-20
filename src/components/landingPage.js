@@ -1,47 +1,51 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from "react-router-dom";
-import auth from './auth';
-import {
-  Form, Icon, Input, Button, Checkbox, Card
-} from 'antd';
-let authuser = new auth();
 
-export const AuthButton = withRouter(
-  ({ history }) =>
-  authuser.isAuthenticated ? (
-      <p>
-        Welcome!{" "}
-       
-        <Button
-          onClick={() => {
-            authuser.setauthenticated;
-            console.log("the value is"+authuser.authenticated);
-            authuser.login(() => {
-              history.push("/example");
-            });
-          }}
-          type="primary" htmlType="submit" className="login-form-button">
-          Sign out
-        </Button>
-      </p>
-    ) : (
-      <p>You are not logged in.</p>
-    )
-);
-export class landingpage extends React.Component {
- 
+import React from 'react';
+// import ReactDOM from 'react-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
+import 'antd/dist/antd.css';
+import '../index.css';
+import Publicmain from './publicRoute';
+//import Main from './route'
+import { Layout, Menu, Breadcrumb } from 'antd';
+
+const { Header, Content, Footer } = Layout;
+
+
+
+export class landingPage extends React.Component {
+  
 
   render() {
+    
    
     return (
-  
-  <AuthButton/>
+      <BrowserRouter>
+      <Layout className="layout">
+    <Header>
+      <div className="homelogo" />
+      <div className="Menu">
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['1']}
+        style={{ lineHeight: '64px' }}
+      >
+        <Menu.Item key="1">Home<Link to="/home"/></Menu.Item>
+        <Menu.Item key="2">Contact us</Menu.Item>
+        <Menu.Item key="3">About</Menu.Item>
+      </Menu>
+      </div>
+    </Header>
+    <Content style={{ margin: '0 16px' }}>
+      <Publicmain/>
+      {/* <main/> */}
+      {/* <div style={{ background: '#fff', padding: 0, minHeight: 510 }}>Content</div> */}
+    </Content>
+    <Footer style={{ textAlign: 'center' }}>
+      
+    </Footer>
+  </Layout>
+  </BrowserRouter>
     );
   }
 }

@@ -19,17 +19,25 @@ class createReport extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('http://localhost:4000/api/reports',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
-        
+        let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
+        console.log(projectSelected);
+        if(projectSelected!==null){
+          //http://localhost:4000/api/projects/5cdc4463b951ca03c8925000/reports
+          //axios.post('http://localhost:4000/api/reports',qs.stringify(values, { filter: ['workperformed','detailedActivityDesc','actualTime','planedPrice','usedPrice'],arrayFormat: 'comma' }))
+        axios.post('http://localhost:4000/api/projects/5cdc4463b951ca03c8925000/reports',qs.stringify(values, { filter: ['workperformed','detailedActivityDesc','actualTime','planedPrice','usedPrice'],arrayFormat: 'comma' }))
+ 
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
+      }else{
+        console.log("you have to select a project to send report")
+      }
 
-        console.log('Received values of form: ', values);
-        console.log(qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }));
+       // console.log('Received values of form: ', values);
+       // console.log(qs.stringify(values, { filter: ['workperformed','detailedActivityDesc','actualTime','planedPrice','usedPrice'],arrayFormat: 'comma' }));
 
        
       }

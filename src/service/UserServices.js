@@ -213,6 +213,7 @@ class UserService {
                        //localStorage.clear;
                         localStorage.removeItem("authorized");
                         localStorage.removeItem("projectSelected");
+                        localStorage.removeItem("username");
                       window.location = "login";
                   });
           }

@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import axios from 'axios';
 import qs from 'qs';
+import * as session from 'browser-session-store';
 import {TopHeader} from '../Header/topHeader'
 import { isArray } from 'util';
 let dragingIndex = -1;
@@ -166,7 +167,25 @@ class DragSortingTable extends React.Component {
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    
+    //var results=["the","following","data"];
+    var results=JSON.parse(sessionStorage.getItem('userData'));
+    console.log("****this view project console result***")
+    console.log(results.particpateIn);
+    let value=[];
+    results.particpateIn.forEach(function(item){
+      //valuese.push(item.projectName,item.projectId]);
+
+     // value.push(`{"project": ${item}}`);
+     value.push({"project": item});
+      //return console.log(`{"project": ${item}}`);
+      console.log(value);
+      //children.push(<Option key={item.projectId}>{item.projectName}</Option>);
+      //children.push(<Option key={1234}>some value</Option>);
+    });
+
+    console.log('http://localhost:4000/api/projects?filter={"where":{"or":['+value+']}}');
+    //axios.get('http://localhost:4000/api/projects?filter={"where":{"or":[{"projectId":"5cdc43bab951ca03c8924fff"},{"projectId":"5cdc4463b951ca03c8925000"},{"projectId":"5ce19fe31062ff0695225bdd"}}']}}')
+    //axios.get('http://localhost:4000/api/projects')
     axios.get('http://localhost:4000/api/projects')
     .then(function (projectResponse) {
      // this.setState({ datapro: projectResponse.data[0]  });

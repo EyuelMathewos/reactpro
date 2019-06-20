@@ -9,6 +9,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import axios from 'axios';
 import qs from 'qs';
+import * as session from 'browser-session-store';
+import {TopHeader} from '../Header/topHeader'
 import { isArray } from 'util';
 let dragingIndex = -1;
  let  proResponse;
@@ -96,31 +98,25 @@ const DragableBodyRow = DropTarget(
 );
 
 const columns = [
-  {
-    title: 'Work performed',
-    dataIndex: 'workperformed',
-    key: 'workperformed',
-  },
-  {
-  title: 'Discription',
-  dataIndex: 'detailedActivityDesc',
-  key: 'detailedActivityDesc',
-},
- {
-  title: 'Actual Time',
-  dataIndex: 'actualTime',
-  key: 'actualTime',
+{
+  title: 'Project Name',
+  dataIndex: 'projectName',
+  key: 'projectName',
+}, {
+  title: 'Site Place',
+  dataIndex: 'siteplace',
+  key: 'siteplace',
 },
 {
-    title: 'planned Price',
-    dataIndex: 'planedPrice',
-    key: 'planedPrice',
-  },
-  {
-    title: 'used Price',
-    dataIndex: 'usedPrice',
-    key: 'usedPrice',
-  }
+  title: 'Property Owner',
+  dataIndex: 'propertyowner',
+  key: 'propertyowner',
+}
+, {
+  title: 'Project Life Time',
+  dataIndex: 'projectLifeTime',
+  key: 'projectLifeTime',
+}
 ];
 const dataSource = []
 function setProject(event) {
@@ -131,27 +127,23 @@ export default function DataModal(displayableData,data) {
   
 
 
-  Modal.info({
-      title: 'Project Report',
+  Modal.confirm({
+      title: 'Do you want to select this project',
       content: (
        
           <div className="modal_data_wrapper">
-          <h4>Project Name</h4>
-          <p>{data.projectname}</p>
-          <h4>Task Discription</h4>
-          <p>{data.detailedActivityDesc}</p>
-          <h4>Actual Time</h4>
-          <p>{data.actualTime}</p>
-          <h4>planned price</h4>
-          <p>{data.planedPrice}</p>
-          <h4>used price</h4>
-          <p>{data.usedPrice}</p>
-          {/* {displayableData} */}
+          {displayableData}
          </div>
       ),
+      okText:"Set Project",
        style: { top: 100, height: '83vh' },
-       centered:"true",
-      // onOk() { },
+      width: '100%',
+      onOk() { 
+        localStorage.setItem("projectSelected",data);
+        message.success("you selected a project");
+        window.location.reload();
+        
+      },
   });
 }
 
@@ -161,22 +153,40 @@ class DragSortingTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datapro: []
+      datapro: [],
+      projectName: "",
+      
+
     };
   }
   
  
   componentDidMount () {
     let component = this;
-    let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
-    console.log(projectSelected);
     var request = new XMLHttpRequest(); request.open('GET', '/table', true);
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    //axios.get('http://localhost:4000/api/reports')
-  if(projectSelected!==null){
-    axios.get('http://localhost:4000/api/projects/'+projectSelected.projectId+'/reports')
+    //var results=["the","following","data"];
+    var results=JSON.parse(sessionStorage.getItem('userData'));
+    console.log("****this view project console result***")
+    console.log(results.particpateIn);
+    let value=[];
+    results.particpateIn.forEach(function(item){
+      //valuese.push(item.projectName,item.projectId]);
+
+     // value.push(`{"project": ${item}}`);
+     value.push({"projectId": item});
+      //return console.log(`{"project": ${item}}`);
+      console.log(value);
+      //children.push(<Option key={item.projectId}>{item.projectName}</Option>);
+      //children.push(<Option key={1234}>some value</Option>);
+    });
+
+    console.log('http://localhost:4000/api/projects?filter={"where":{"or":'+JSON.stringify(value)+'}}');
+    //axios.get('http://localhost:4000/api/projects?filter={"where":{"or":[{"projectId":"5cdc43bab951ca03c8924fff"},{"projectId":"5cdc4463b951ca03c8925000"},{"projectId":"5ce19fe31062ff0695225bdd"}}']}}')
+    //axios.get('http://localhost:4000/api/projects')
+    axios.get('http://localhost:4000/api/projects?filter={"where":{"or":'+JSON.stringify(value)+'}}')
     .then(function (projectResponse) {
      // this.setState({ datapro: projectResponse.data[0]  });
      component.setState({ datapro: projectResponse.data });
@@ -205,7 +215,6 @@ class DragSortingTable extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
-  }
     this.setState({someData: request.responseText}) } else {
             // We reached our target server, but it returned an error
             // Possibly handle the error by changing your state.
@@ -300,8 +309,8 @@ class DragSortingTable extends React.Component {
           moveRow: this.moveRow,
           onClick: event => {
               console.log(record);
-       
-              DataModal( qs.stringify(record, { filter: ['projectName','detailedActivityDesc','workperformed','actualTime','planedPrice','usedPrice'],arrayFormat: 'comma' }),record);
+             
+              DataModal( qs.stringify(record, { filter: ['projectName','propertyowner','siteplace'],arrayFormat: 'comma' }),JSON.stringify(record));
           }
         })}
       />
@@ -310,7 +319,7 @@ class DragSortingTable extends React.Component {
       }
 }
 
-export const viewReport = DragDropContext(HTML5Backend)(DragSortingTable);
+export const table = DragDropContext(HTML5Backend)(DragSortingTable);
 
 //ReactDOM.render(<Demo />, document.getElementById('container'));
           

@@ -7,6 +7,7 @@ import '../../../index.css';
 // import Main from './route';
 import { AdminHeader } from './adminHeader';
 import Submain from './dashroute';
+import {TopHeader} from './adminHeader';
 
 import {
   Layout, Menu, Icon,
@@ -65,12 +66,18 @@ export class SiderDemo extends React.Component {
               <Menu.Item key="3">Register User<Link to="/dashboard/register"/></Menu.Item>
               {/* <Menu.Item key="8">Deactivate User</Menu.Item> */}
             </SubMenu>
+            <Menu.Item key="4">
+              <Icon type="team" />
+              <span>Users</span>
+              <Link to="/dashboard/users" />
+            </Menu.Item>
 
           </Menu>
         </Sider>
         <Layout>
           {/* <Header style={{ background: '', padding: 0 }}> */}
-          <AdminHeader/>
+          {/* <AdminHeader/> */}
+          <TopHeader/>
           {/* </Header> */}
           <Content style={{ margin: '0 16px' }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>

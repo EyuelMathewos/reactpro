@@ -12,6 +12,7 @@ import {table} from "../Project/viewProjects";
 import {viewReport} from "../Project/viewReport";
 import {viewSchedule} from "../Project/viewSchedule";
 import {request} from "../Project/request";
+import {userAccess} from "../Project/userAccess"
 
 let logauth = new Login();
 
@@ -44,6 +45,7 @@ const Submain = () => (
       <Route exact path="/projectmanager/viewreport" component={viewReport}/> 
       <Route exact path="/projectmanager/viewschedule" component={viewSchedule}/>
       <Route exact path="/projectmanager/request" component={request}/>
+      <Route exact path="/projectmanager/useraccess" component={userAccess}/>
     </Switch>
      
   </main>
