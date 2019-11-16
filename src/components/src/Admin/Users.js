@@ -4,6 +4,8 @@ import "antd/dist/antd.css";
 import "../../../index.css";
 import { Table, Button ,Form, Modal,message,Input,Icon,Tooltip } from "antd";
 import { Resizable } from "react-resizable";
+import { DragDropContext, DragSource, DropTarget } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import axios from 'axios';
 import qs from 'qs';
 let selectedRow=[];
@@ -25,7 +27,7 @@ const UserCreateForm = Form.create({ name: 'form_in_modal' })(
         >
           <Form layout="vertical">
           <Form.Item label="First Name">
-          {getFieldDecorator("firstname", {
+          {getFieldDecorator("firstName", {
             rules: [{message: "Please input your First name!" }]
           })(<Input />)}
         </Form.Item>
@@ -145,14 +147,13 @@ export class users extends React.Component {
 
     this.state = {
       datapro: [],
-      visible: false,
-      
+      visible: false,     
     };
   }
   showModal (data){
     this.setState({ visible: true });
     this.formRef.props.form.setFieldsValue({
-      firstname: data.firstName,
+      firstName: data.firstName,
     });
     this.formRef.props.form.setFieldsValue({
       lastName: data.lastName,
@@ -183,11 +184,12 @@ export class users extends React.Component {
       // console.log("this is the value form handle create");
       // console.log(selectedRow.id);
       console.log('Received values of form: ', values);
-      axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id,qs.stringify(values, { filter: ['firstName','lastName','email','role','phoneNo','username'],arrayFormat: 'comma' }))
+     // console.log('http://localhost:4000/api/Accounts/'+selectedRow.id+qs.stringify(values, { filter: ['firstName','lastName','email','role','phoneNo','username'],arrayFormat: 'comma' }));
+      axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id,qs.stringify(values, { filter: ['lastName','firstName','email','role','phoneNo','username'],arrayFormat: 'comma' }))
         
       .then(function (response) {
         console.log(response);
-        //window.location.reload();
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -196,6 +198,7 @@ export class users extends React.Component {
       //form.resetFields();
       //this.setState({ visible: false });
     });
+    
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
@@ -311,7 +314,7 @@ export class users extends React.Component {
       
     },
     {
-      title: 'delete',
+      title: 'Delete',
       align: 'center',
       width:100,
       render: (text, record) =>{
@@ -498,4 +501,4 @@ export class users extends React.Component {
 }
 
 //ReactDOM.render(<Demo />, document.getElementById("container"));
-//export const request = DragDropContext(HTML5Backend)(Demo);
+//export const request = DragDropContext(HTML5Backend)(users);

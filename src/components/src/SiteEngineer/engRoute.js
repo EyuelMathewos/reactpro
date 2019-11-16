@@ -15,7 +15,7 @@ import {createschedule} from "../Project/createSchedule";
 import {viewSchedule} from "../Project/viewSchedule";
 import {request} from "../Project/request";
 import {createrequest} from "../Project/createRequest"
-import {createreq} from "../Project/createReq"
+//import {createreq} from "../Project/createReq"
 let logauth = new Login();
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -46,7 +46,7 @@ const Submain = () => (
       <Route path="/siteengineer/createreport" component={createreport} /> 
       <Route exact path="/siteengineer/viewreport" component={viewReport}/>
       <Route exact path="/siteengineer/createrequest" component={createrequest}/>  
-      <Route path="/siteengineer/createreq" component={createreq}/>
+      {/* <Route path="/siteengineer/createreq" component={createreq}/> */}
       <Route exact path="/siteengineer/viewschedule" component={viewSchedule}/>
       <Route exact path="/siteengineer/request" component={request}/>
     </Switch>

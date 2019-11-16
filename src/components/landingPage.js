@@ -6,7 +6,7 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import Publicmain from './publicRoute';
 //import Main from './route'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb,Popover } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 

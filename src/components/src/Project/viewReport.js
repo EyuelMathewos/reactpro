@@ -146,12 +146,10 @@ export default function DataModal(displayableData,data) {
           <p>{data.planedPrice}</p>
           <h4>used price</h4>
           <p>{data.usedPrice}</p>
-          {/* {displayableData} */}
          </div>
       ),
        style: { top: 100, height: '83vh' },
        centered:"true",
-      // onOk() { },
   });
 }
 
@@ -174,20 +172,13 @@ class DragSortingTable extends React.Component {
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
     // Success!
-    //axios.get('http://localhost:4000/api/reports')
   if(projectSelected!==null){
     axios.get('http://localhost:4000/api/projects/'+projectSelected.projectId+'/reports')
     .then(function (projectResponse) {
-     // this.setState({ datapro: projectResponse.data[0]  });
+
      component.setState({ datapro: projectResponse.data });
-      //console.log(proresponse);
-      //console.log(JSON.stringify({ x: 5, y: 6 }));
-       let data =projectResponse.data;
-      // console.log(proResponse[0]);
-     // this.setState({data: projectResponse.data});
-      
-      //console.log(JSON.stringify({data}));
-      //console.log("this is it"+proResponse);
+
+       //let data =projectResponse.data;
       console.log("this is the data");
       console.log(projectResponse.data);
       console.log(Array.isArray(projectResponse.data));
@@ -216,56 +207,6 @@ class DragSortingTable extends React.Component {
     };
         request.send();
        } 
-       // componentDidMount () {
-    
-      //   var request = new XMLHttpRequest(); request.open('GET', '/table', true);
-      //   request.onload = () => {
-      //   if (request.status >= 200 && request.status < 400) {
-      //   // Success!
-      //   axios.get('http://localhost:4000/api/projects')
-      //   .then(function (projectResponse) {
-      //     //console.log(proresponse);
-      //     //console.log(JSON.stringify({ x: 5, y: 6 }));
-      //     // proResponse =projectResponse.data;
-      //     // console.log(proResponse[0]);
-         
-          
-      //     console.log(qs.stringify(projectResponse.data[5]);
-      //    // console.log("this is value"+proResponse.data[5]);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
-      //   this.setState({someData: request.responseText}) } else {
-      //           // We reached our target server, but it returned an error
-      //           // Possibly handle the error by changing your state.
-      //   } };
-      //   request.onerror = () => {
-      //   // There was a connection error of some sort.
-      //   // Possibly handle the error by changing your state.
-      //   };
-      //       request.send();
-      //     }
-  
-  // state = {
-  //   
-  //   data: [{
-  //     key: '1',
-  //     name: 'John Brown',
-  //     age: 32,
-  //     address: 'New York No. 1 Lake Park',
-  //   }, {
-  //     key: '2',
-  //     name: 'Jim Green',
-  //     age: 42,
-  //     address: 'London No. 1 Lake Park',
-  //   }, {
-  //     key: '3',
-  //     name: 'Joe Black',
-  //     age: 32,
-  //     address: 'Sidney No. 1 Lake Park',
-  //   }]
-  // }
 
   components = {
     body: {
@@ -311,6 +252,4 @@ class DragSortingTable extends React.Component {
 }
 
 export const viewReport = DragDropContext(HTML5Backend)(DragSortingTable);
-
-//ReactDOM.render(<Demo />, document.getElementById('container'));
           

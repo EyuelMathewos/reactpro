@@ -4,9 +4,8 @@ import "antd/dist/antd.css";
 import "../../../index.css";
 import axios from 'axios';
 import qs from 'qs';
-import { Form, Input, Select, Button, AutoComplete, DatePicker } from "antd";
+import { Form, Input, Select, Button, AutoComplete, DatePicker,message } from "antd";
 
-const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 const { RangePicker } = DatePicker;
 function onChange(date, dateString) {
@@ -25,7 +24,6 @@ class createSchedule extends React.Component {
         let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
         console.log(projectSelected);
         if(projectSelected!==null){
-       //axios.post('http://localhost:4000/api/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }))
         axios.post('http://localhost:4000/api/projects/'+projectSelected.projectId+'/schedules',qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice','scheduleLifeTime'],arrayFormat: 'comma' }))
         
         .then(function (response) {
@@ -34,6 +32,9 @@ class createSchedule extends React.Component {
         .catch(function (error) {
           console.log(error);
         });
+          }
+          else{
+            message.error("you have to select a project to send a schedule");
           }
         console.log('Received values of form: ', values);
         console.log(qs.stringify(values, { filter: ['taskToPerform','performancePerDay','actualTime','planedPrice'],arrayFormat: 'comma' }));
@@ -53,12 +54,12 @@ class createSchedule extends React.Component {
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
+        xs: { span: 6 },
+        sm: { span: 6 }
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
+        xs: { span: 14 },
+        sm: { span: 14 }
       }
     };
     const tailFormItemLayout = {

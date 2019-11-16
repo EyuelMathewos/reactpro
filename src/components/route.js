@@ -44,6 +44,7 @@ const Main = () => (
   <main>
     
     <Switch>
+    <Route exact path="/login" component={Login} />
       <Route  path="/dashboard" component={SiderDemo} />  
       <Route exact path="/" component={landingPage} />
       <Route path="/home" component={landingPage}/>
@@ -57,7 +58,7 @@ const Main = () => (
       {/* <Route path="/account" component={account} /> */}
       {/* <Route  path="/register" component={WrappedRegistrationForm} /> */}
       {/* <Route  path="/accountsetting" component={WrapperAccountSetting} /> */}
-      <Route  path="/login" component={Login} />
+     
       {/* <Route  path="/table" component={Events} /> */}
       {/* <Route  path="/land" component={landingpage} /> */}
       <Route  path="/frontchart" component={frontChart} />

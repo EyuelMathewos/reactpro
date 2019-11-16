@@ -37,25 +37,6 @@ export class userAccess extends React.Component {
         console.log(`selected ${value}`);
         console.log([value]);
         console.log(selectedRow.id);
-        // value.forEach(function(item){
-        //   //valuese.push(item.projectName,item.projectId]);
-         
-        //   return console.log(`{"project": ${item}}`);
-        //   //children.push(<Option key={item.projectId}>{item.projectName}</Option>);
-        //   //children.push(<Option key={1234}>some value</Option>);
-          
-        // });
-        //5cdc4463b951ca03c8925000
-       // console.log(qs.parse('particpateIn['+value+']'));
-        //console.log('particpateIn:['+value+']');
-        //console.log('"particpateIn":['+value+']')
-        //console.log(`{"particpateIn":["${value}"]}`)
-            // let part=particpateIn[value];
-            // console.log(particpateIn);
-            // {particpateIn:{5cdc4463b951ca03c8925000}}
-            // axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id+'','particpateIn:['+value+']')
-            // axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id+'','particpateIn:[5cdc4463b951ca03c8925000]')
-           // axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id,'"particpateIn":['+value+']')
            axios.patch('http://localhost:4000/api/Accounts/'+selectedRow.id,{"particpateIn":value==null?[]:value})
             .then(function (response) {
               console.log(response);
@@ -115,21 +96,11 @@ export class userAccess extends React.Component {
         request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
         // Success!
-        //axios.get('http://localhost:4000/api/Requests')
-        //axios.get('http://localhost:4000/api/projects/5cdc43bab951ca03c8924fff/requests')
-       // if(projectSelected!==null){
         axios.get('http://localhost:4000/api/Accounts?filter={"where":{"role": "siteEngineer"}}')
         .then(function (projectResponse) {
-         // this.setState({ datapro: projectResponse.data[0]  });
          component.setState({ datapro: projectResponse.data });
-          //console.log(proresponse);
-          //console.log(JSON.stringify({ x: 5, y: 6 }));
-           let data =projectResponse.data;
-          // console.log(proResponse[0]);
-         // this.setState({data: projectResponse.data});
-          
-          //console.log(JSON.stringify({data}));
-          //console.log("this is it"+proResponse);
+           //let data =projectResponse.data;
+
           console.log("this is the data");
           console.log(projectResponse.data);
           console.log(Array.isArray(projectResponse.data));
@@ -148,13 +119,8 @@ export class userAccess extends React.Component {
         component.setState({ project: response.data });
         let data = component.state.project;
         data.forEach(function(item){
-          //valuese.push(item.projectName,item.projectId]);
-          children.push(<Option key={item.projectId}>{item.projectName}</Option>);
-          //children.push(<Option key={1234}>some value</Option>);
-          
+          children.push(<Option key={item.projectId}>{item.projectName}</Option>);     
         });
-        console.log("this is the pushed values")
-        //console.log(valuese);
       })
       .catch(function (error) {
         console.log(error);
@@ -207,7 +173,6 @@ export class userAccess extends React.Component {
               index,
               onClick: event => {
                   selectedRow=record;
-                 //console.log(selectedRow);
               }
             })}
           />

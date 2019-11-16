@@ -7,7 +7,7 @@ import axios from 'axios';
 import Api from "../../../service/Api";
 import qs from 'qs'
 import {
-  Form, Input, Tooltip, Icon, Cascader, Select, Button,
+  Form, Input, Tooltip, Icon, Cascader, Select, Button,message
 } from 'antd';
 
 const { Option } = Select;
@@ -33,12 +33,7 @@ const options = [
     value: "siteCoordinator",
     label: "Site Coordinator"
   }
-  ,
-  {
-    value: "finance",
-    label: "Finance"
-  }
-
+  
 
 ];
 
@@ -55,12 +50,14 @@ const options = [
         axios.post('http://localhost:4000/api/Accounts',qs.stringify(values, { filter: ['firstName','lastName','email','password','role','phoneNo','username'],arrayFormat: 'comma' }))
         
         .then(function (response) {
+          //form.resetFields();
+          message.success("you registered a user");
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
-
+        
         console.log('Received values of form: ', values);
         console.log(qs.stringify(values, { filter: ['firstName','lastName','email','role','phoneNo','username','password'],arrayFormat: 'comma' }));
 
@@ -110,14 +107,18 @@ const options = [
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
+        xs: { span: 6 },
+        sm: { span: 6 },
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
+        xs: { span: 14 },
+        sm: { span: 14 },
       },
     };
+    // const formItemLayout = {
+    //   labelCol: { span: 6 },
+    //   wrapperCol: { span: 14 }
+    // };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {

@@ -4,11 +4,11 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import UserService from "../../../service/UserServices";
 import {
-  Layout, Menu, Icon, Avatar, Dropdown , Mention,Button
+  Layout, Menu, Icon, Avatar, Dropdown , Mention,Button,Row, Col, Card, Tooltip
 } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
-
+import { users } from './Users';
 
 
 export class frontDashboard extends React.Component {
@@ -16,11 +16,26 @@ export class frontDashboard extends React.Component {
     // console.log(projectSelected.projectName));
 
        return ( 
-         <div>
-           <Button type="primary" onClick={this.showDrawer}>
-          <Icon type="plus" /> New account
-        </Button>
-         </div>
+        
+<div style={{ background: '#ECECEC', padding: '30px' }}>
+    <Row gutter={16}>
+      <Col span={8}>
+      <Card bordered={false}>
+          Card content
+        </Card>  
+      </Col>
+      <Col span={8}>
+        <Card bordered={false}>
+          Card content
+        </Card>
+      </Col>
+      <Col span={8}>
+        <Card bordered={false}>
+          Card content
+        </Card>
+      </Col>
+    </Row>
+  </div>
         )
       }
 

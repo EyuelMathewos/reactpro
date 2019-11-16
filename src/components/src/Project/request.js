@@ -28,16 +28,14 @@ function hello(data){
 function approveAction(data){
   axios.get('http://localhost:4000/api/approvals?filter={"where": {"approvalRequestId": '+data+'}}')
   .then(function (response) {
-    if(!response.data[0].approved){
+    console.log("this is the condition of the inside button");
+    console.log(response.data[0].approved=="");
+    if(response.data[0].approved==""||response.data[0].approved=="false"){
       //console.log(data);
-      message.error("You Already Approved It"); 
-      console.log("you already approved it")
-    }else{
-
       console.log('http://localhost:4000/api/approvals/'+response.data[0].approvalid);
       axios.patch('http://localhost:4000/api/approvals/'+response.data[0].approvalid,{"approved": true})
       .then(function (response) {
-        message.success("You Approve This Request");
+        //message.success("You Approve This Request");
         window.location.reload();
         console.log(response.data)
         console.log("ehh hello world")
@@ -47,6 +45,22 @@ function approveAction(data){
      });
 
     }
+   // else{
+    //  message.error("You Already Approved It"); 
+    //  console.log("you already approved it")
+    //   console.log('http://localhost:4000/api/approvals/'+response.data[0].approvalid);
+    //   axios.patch('http://localhost:4000/api/approvals/'+response.data[0].approvalid,{"approved": true})
+    //   .then(function (response) {
+    //     message.success("You Approve This Request");
+    //     window.location.reload();
+    //     console.log(response.data)
+    //     console.log("ehh hello world")
+    //      })
+    //   .catch(function (error) {
+    // console.log(error);
+    //  });
+
+    //}
     console.log(response.data[0].approved); 
   })
   .catch(function (error) {
@@ -55,14 +69,14 @@ function approveAction(data){
 
   //console.log("you clicked a button")
   //console.log(data)
-
 }
 function disapproveAction(data){
   console.log(data);
   axios.get('http://localhost:4000/api/approvals?filter={"where": {"approvalRequestId": '+data+'}}')
   .then(function (response) {
     console.log(response.data[0].approvalid);
-    if(response.data[0].approved){
+    //!response.data[0].approved==""||!response.data[0].approved=="false"
+    if(response.data[0].approved==""||response.data[0].approved=="true"){
       console.log('http://localhost:4000/api/approvals/'+response.data[0].approvalid);
         axios.patch('http://localhost:4000/api/approvals/'+response.data[0].approvalid,{"approved": false})
         .then(function (response) {
@@ -73,10 +87,11 @@ function disapproveAction(data){
         .catch(function (error) {
       console.log(error);
        });
-    }else{
-      message.error("You Already Disapproved It"); 
-      console.log("you already disapproved it")
     }
+    // else{
+    //   message.error("You Already Disapproved It"); 
+    //   console.log("you already disapproved it")
+    // }
   })
   .catch(function (error) {
     console.log(error);
@@ -113,6 +128,7 @@ export class request extends React.Component {
       title: 'Approval',
       align: 'center',
       dataIndex: "approvals",
+      width:100,
       
       render: (text, record) =>{
       
@@ -139,7 +155,7 @@ export class request extends React.Component {
           console.log(error);
         });
         console.log("this is the true or false data")
-        console.log(record.approvals.approved)
+      //  console.log(record.approvals.approved)
         //console.log("this is the window test"+approved)//.replace("\"", "")
         if(record.approvals.approved==""){
           return(<div><Button type="primary" onClick={()=>{approveAction(JSON.stringify(record.RequestId))}}>Approve</Button><Divider/><Button type="danger" onClick={()=>{disapproveAction(JSON.stringify(record.RequestId))}}>Disapprove</Button></div>)
@@ -216,7 +232,7 @@ export class request extends React.Component {
   componentDidMount () {
     let component = this;
     let projectSelected=JSON.parse(localStorage.getItem("projectSelected"));
-    console.log(projectSelected);
+    //console.log(projectSelected);
     var request = new XMLHttpRequest(); request.open('GET', '/table', true);
     request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
@@ -312,14 +328,6 @@ export class request extends React.Component {
   };
 
   render() {
-    // const columns = this.state.columns.map((col, index) => ({
-    //   ...col,
-    //   onHeaderCell: column => ({
-    //     width: column.width,
-    //     onResize: this.handleResize(index)
-    //   })
-    // }));
-
     return (
       <Table
         bordered

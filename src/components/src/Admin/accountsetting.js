@@ -76,18 +76,18 @@ const { Option } = Select;
     
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
+        xs: { span: 6 },
+        sm: { span: 6 },
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
+        xs: { span: 14 },
+        sm: { span: 14 },
       },
     };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
-          span: 24,
+          span: 6,
           offset: 0,
         },
         sm: {
@@ -106,6 +106,7 @@ const { Option } = Select;
     );
 
     return (
+      <div align="center" style={{ background: '#ECECEC' }}>
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         {/* this to text box have to be edited */}
         <Form.Item
@@ -211,6 +212,7 @@ const { Option } = Select;
           <Button type="primary" htmlType="submit">update</Button>
         </Form.Item>
       </Form>
+      </div>
     );
   }
 }

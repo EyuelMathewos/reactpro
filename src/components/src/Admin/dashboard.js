@@ -63,14 +63,14 @@ export class SiderDemo extends React.Component {
               key="sub2"
               title={<span><Icon type="team" /><span>Manage Accont</span></span>}
             >
-              <Menu.Item key="3">Register User<Link to="/dashboard/register"/></Menu.Item>
-              {/* <Menu.Item key="8">Deactivate User</Menu.Item> */}
-            </SubMenu>
-            <Menu.Item key="4">
+              <Menu.Item key="3"><Icon type="user" />Register User<Link to="/dashboard/register"/></Menu.Item>
+              <Menu.Item key="4">
               <Icon type="team" />
               <span>Users</span>
               <Link to="/dashboard/users" />
             </Menu.Item>
+            </SubMenu>
+
 
           </Menu>
         </Sider>

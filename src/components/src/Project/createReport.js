@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import "../../../index.css";
 import axios from 'axios';
 import qs from 'qs';
-import { Form, Input, Select, Button, AutoComplete } from "antd";
+import { Form, Input, Select, Button, AutoComplete,message } from "antd";
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -33,6 +33,7 @@ class createReport extends React.Component {
           console.log(error);
         });
       }else{
+        message.error("you have to select a project to send report");
         console.log("you have to select a project to send report")
       }
 
@@ -54,14 +55,24 @@ class createReport extends React.Component {
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
+        xs: { span: 6 },
+        sm: { span: 6 }
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
+        xs: { span: 14 },
+        sm: { span: 14 }
       }
     };
+      // const formItemLayout = {
+    //   labelCol: {
+    //     xs: { span: 6 },
+    //     sm: { span: 6 },
+    //   },
+    //   wrapperCol: {
+    //     xs: { span: 14 },
+    //     sm: { span: 14 },
+    //   },
+    // };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {

@@ -13,6 +13,7 @@ import {viewReport} from "../Project/viewReport";
 import {createschedule} from "../Project/createSchedule";
 import {viewSchedule} from "../Project/viewSchedule";
 import {request} from "../Project/request";
+import {createrep} from "../Project/createReq"
 let logauth = new Login();
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
@@ -39,7 +40,7 @@ const Submain = () => (
       <PrivateRoute exact path="/sitecoordinator/viewproject" component={table}/>
       <Route exact path="/sitecoordinator/viewreport" component={viewReport}/> 
       <Route exact path="/sitecoordinator/viewschedule" component={viewSchedule}/>
-      
+      <Route path="/sitecoordinator/createreport" component={createrep}/>
     </Switch>
      
   </main>

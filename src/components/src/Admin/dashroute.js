@@ -4,20 +4,31 @@ import React from 'react';
 import { WrappedRegistrationForm } from './Register'
  import { WrapperAccountSetting } from './accountsetting'
 import { Login } from '../../login'
-import {Route,Switch } from 'react-router-dom';
+import {Route,Switch,Redirect } from 'react-router-dom';
 import {editReport} from "../Project/editReport"
 import {viewSchedule} from "../Project/viewSchedule"
 import {createschedule} from "../Project/createSchedule";
 import {table} from "../Project/viewProjects";
 import {createreport} from "../Project/createReport";
 import { users } from './Users';
-// import {frontDashboard} from "./frontDashboard"
+import {frontDashboard} from "./frontDashboard"
 // import {createreport} from "../Project/createReport"
+const PrivateRoute = ({component: Component, ...rest}) =>(
+  <Route {...rest} render={(props)=>(
+   //need to auth.isAuthenticated to return boolean
+   //localStorage.getItem("auth")
+   localStorage.getItem("authorized")
+   ?<Component {...props}/>
+   : <Redirect to='/login'/>
+  )
 
+  }/>
+)
 const Submain = () => (
   <main>
      <Switch>
-      {/* <Route exact path="/dashboard" component={frontDashboard} /> */}
+     <Route exact path="/login" component={Login} />    
+      <Route exact path="/dashboard" component={frontDashboard} />
       {/* <Route path="/account" component={account} /> */}
       {/* <Route path="/createreport" component={createreport} /> */}
       <Route path="/siteengineer/createreport" component={createreport} />
@@ -28,7 +39,7 @@ const Submain = () => (
       <Route  path="/dashboard/register" component={WrappedRegistrationForm} />
       <Route  path="/dashboard/accountsetting" component={WrapperAccountSetting} />
       <Route path="/dashboard/users" component={users}/>
-      <Route  path="/login" component={Login} />    
+     
     </Switch>
   
   </main>

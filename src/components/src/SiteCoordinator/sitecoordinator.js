@@ -45,7 +45,7 @@ export class siteCoordinator extends React.Component {
             <Menu.Item key="1">
               <Icon type="pie-chart" />
               <span>Dashboard</span>
-              <Link to="/dashboard" />
+              <Link to="/sitecoordinator/dashboard" />
             </Menu.Item>
             <Menu.Item key="2">
             {/* onClick={() => alert("clicked")} */}
@@ -59,7 +59,7 @@ export class siteCoordinator extends React.Component {
             >  
               <Menu.Item key="3">View Schedule<Link to="/sitecoordinator/viewschedule"/></Menu.Item>
               <Menu.Item key="4">View Report<Link to="/sitecoordinator/viewreport"/></Menu.Item>
-              <Menu.Item key="5">Observation Report<Link to=""/></Menu.Item>
+              <Menu.Item key="5">Observation Report<Link to="/sitecoordinator/createreport"/></Menu.Item>
             </SubMenu>
             
           </Menu>

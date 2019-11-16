@@ -63,7 +63,23 @@ export class CollectionsPage extends React.Component {
         
       .then(function (response) {
         console.log(response);
+        //approval input
+        axios.post('http://localhost:4000/api/approvals',qs.stringify(  {
+          "projectName": projectSelected.projectName,
+          "approvalProjectId": response.data.requestProjectId,
+          "approvalRequestId": response.data.RequestId,
+          "approved": ""
+        }))
+        
+      .then(function (response) {
+        console.log(response);
         window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+        //approval input end
+        //window.location.reload();
       })
       .catch(function (error) {
         console.log(error);

@@ -22,7 +22,7 @@ function onChange(date, dateString) {
   console.log(date, dateString);
 }
 
-class createReq extends React.Component {
+class createRep extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -84,14 +84,14 @@ class createReq extends React.Component {
     };
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="About Request">
+        <Form.Item label="work performed">
           {getFieldDecorator("AboutRequest", {
             rules: [{ required: true, message: "Please input your username!" }]
           })(<Input />)}
         </Form.Item>
 
 
-        <Form.Item label="Detail about the request">
+        <Form.Item label="Observation of the report">
           {getFieldDecorator("Detail", {
             rules: [{ required: true, message: "Please input your username!" }]
           })(<Input />)}
@@ -100,7 +100,7 @@ class createReq extends React.Component {
 
         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
           <Button type="primary" htmlType="submit">
-            Create Request
+            Observation Report
           </Button>
         </Form.Item>
       </Form>
@@ -108,6 +108,6 @@ class createReq extends React.Component {
   }
 }
 
-export const createreq = Form.create({ name: "validate_other" })(createReq);
+export const createrep = Form.create({ name: "validate_other" })(createRep);
 
 //ReactDOM.render(<WrappedDemo />, document.getElementById("container"));
