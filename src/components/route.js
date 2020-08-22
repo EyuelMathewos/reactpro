@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Switch, Route, Redirect } from 'react-router-dom'
-import {landingPage} from './landingPage'
+import {LandingPage} from './landingPage'
 import { home } from './home'
 import { SiderDemo } from './src/Admin/dashboard';
  import { users } from './src/Admin/Users';
@@ -46,12 +46,11 @@ const Main = () => (
     <Switch>
     <Route exact path="/login" component={Login} />
       <Route  path="/dashboard" component={SiderDemo} />  
-      <Route exact path="/" component={landingPage} />
-      <Route path="/home" component={landingPage}/>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/home" component={LandingPage}/>
       <Route exact path="/project" component={project} />
       <Route exact path="/createschedule" component={createschedule}/>
       <Route path="/users" component={users}/>
-     
       {/* <Route path="/siteengineer/createreport" component={createreport} />
       <Route exact path="/siteengineer/editreport" component={editReport}/> */}
       {/* <Route exact path="/viewschedule" component={viewSchedule}/> */}

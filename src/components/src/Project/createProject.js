@@ -94,7 +94,7 @@ class Demo extends React.Component {
               {
                 type: "array",
                 required: true,
-                message: "Please select your Role !"
+                message: "Please select your Place of the site !"
               }
             ]
           })(<Cascader options={options} />)}
@@ -102,13 +102,13 @@ class Demo extends React.Component {
 
         <Form.Item label="The owner of the Property">
           {getFieldDecorator("propertyowner", {
-            rules: [{ required: true, message: "Please input your username!" }]
+            rules: [{ required: true, message: "Please input your Property Owner!" }]
           })(<Input />)}
         </Form.Item>
 
         <Form.Item label="Project life time">
           {getFieldDecorator("projectLifeTime", {
-            rules: [{ required: true, message: "Please input your username!" }]
+            rules: [{ required: true, message: "Please input your Project Life time!" }]
           })(<RangePicker onChange={onChange} />)}
         </Form.Item>
 

@@ -98,13 +98,13 @@ const data = [
 ];
 
 const values = [
-  "hello",
-  "whats up",
-  "what are you doing",
-  "已购买",
-  "已购买",
-  "已排期",
-  "已完成"
+  "good",
+  "good enough",
+  "below expectation",
+  "not bad",
+  "bad",
+  "report",
+  "report"
 ];
 const colors = [
   "#9e9e9e",
@@ -115,17 +115,14 @@ const colors = [
   "#00bcd4",
   "#2FC25B"
 ];
-data.forEach(obj => {
-  obj.range = [obj.startTime, obj.endTime];
-  obj.status = values[obj.status];
-});
+
 
 const scale = {
   range: {
     alias: "日期范围",
     type: "time",
-    min: "2018-01-01",
-    max: "2018-05-31"
+    min: "2019-01-01",
+    max: "2022-05-31"
   }
 };
 export class frontChart extends React.Component {
@@ -142,6 +139,7 @@ export class frontChart extends React.Component {
     .then(function (projectResponse) {
       component.setState({ schedule: projectResponse.data });
       console.log(component.state.schedule)
+      console.log(component.state.schedule[0].scheduleLifeTime[0])
       value=projectResponse.data[0];
       localStorage.setItem("schduel",JSON.stringify(value))
 
@@ -154,13 +152,17 @@ export class frontChart extends React.Component {
   }
  
   render() {
+    this.state.schedule.forEach(obj => {
+      obj.range = [obj.startTime, obj.endTime];
+      obj.status = values[obj.status];
+    });
     return (
     
         <Chart
           theme="light"
           padding="auto"
           height={400}
-          data={data}
+          data={this.state.schedule}
           forceFit
           scale={scale}
         >
@@ -173,12 +175,12 @@ export class frontChart extends React.Component {
             position="task*range"
             color={["status", colors]}
           >
-            {/* <Label
+            <Label
               content={[
                 'startTime*endTime',
-                (startTime, endTime) => `${startTime} 至 ${endTime}`,
+                (startTime, endTime) => `${startTime} upto ${endTime}`,
               ]}
-            /> */}
+            />
           </Geom>
         </Chart>
         

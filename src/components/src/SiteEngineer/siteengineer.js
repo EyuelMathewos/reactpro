@@ -90,7 +90,7 @@ export class siteEngineer extends React.Component {
             </div> */}
             {/* <Main/> */}
              <Submain/>
-            
+            <frontChart/>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             {/* Ant Design ©2018 Created by Ant UED */}

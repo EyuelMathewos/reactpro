@@ -2,7 +2,7 @@ import React from 'react';
 import {Route,Switch, Redirect } from 'react-router-dom';
 
 import { home } from './home';
-
+import { Login } from './login'
 
 
 
@@ -10,7 +10,8 @@ const Publicmain = () => (
   
   <main>
      <Switch>
-     <Route exact path="/home" component={home}/>
+     <Route exact path="/" component={home}/>
+     <Route exact path="/Login" component={Login}/>
       {/* <Route exact path="/login" component={Login} />
       {/* <Route path="/account" component={account} /> */}
       {/* <PrivateRoute path="/example" component={App}/>   */}
